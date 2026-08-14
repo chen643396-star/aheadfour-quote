@@ -19,17 +19,16 @@ GitHub Pages 检测到推送即自动重建，公网站约 1 分钟生效。
 """
 import os
 import re
-import sys
 import json
 import base64
-import cgi
 import tempfile
 import urllib.request
 import urllib.error
 from datetime import datetime
-from http.server import BaseHTTPRequestHandler
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if sys_path not in __import__("sys").path:
+    __import__("sys").path.append(sys_path)
 from parser_xlsx import parse_workbook  # noqa: E402
 
 
@@ -70,132 +69,149 @@ def _gh_upload_file(repo, token, branch, path_rel, content_bytes, message=None):
     return _gh_api("PUT", f"/repos/{repo}/contents/{path_rel}", token, data)
 
 
-CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "*",
-}
+def _json_resp(code, obj):
+    """构造 Vercel Response 格式。"""
+    body_str = json.dumps(obj, ensure_ascii=False)
+    return {
+        "statusCode": code,
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        },
+        "body": body_str,
+    }
 
 
-class handler(BaseHTTPRequestHandler):
-    def _send(self, code, obj):
-        payload = json.dumps(obj, ensure_ascii=False).encode("utf-8")
-        self.send_response(code)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        for k, v in CORS_HEADERS.items():
-            self.send_header(k, v)
-        self.send_header("Content-Length", str(len(payload)))
-        self.end_headers()
-        self.wfile.write(payload)
-
-    def do_OPTIONS(self):
-        self.send_response(204)
-        for k, v in CORS_HEADERS.items():
-            self.send_header(k, v)
-        self.send_header("Content-Length", "0")
-        self.end_headers()
-
-    def do_POST(self):
-        admin_pw = _env("ADMIN_PW", "")
-        content_type = self.headers.get("Content-Type", "")
-
-        # ---- 尝试方式 A：multipart/form-data（FormData）----
-        if "multipart/form-data" in content_type:
-            try:
-                form = cgi.FieldStorage(
-                    fp=self.rfile,
-                    headers=self.headers,
-                    environ={
-                        "REQUEST_METHOD": "POST",
-                        "CONTENT_TYPE": content_type,
-                    },
-                )
-                client_pw = form.getvalue("pw", "")
-                if not client_pw:
-                    client_pw = self.headers.get("X-Admin-Pw", "")
-                if admin_pw and client_pw != admin_pw:
-                    self._send(403, {"ok": False, "message": "密码错误"})
-                    return
-
-                file_item = form.getfirst("file") if "file" in form else None
-                if not file_item or not hasattr(file_item, "file"):
-                    self._send(400, {"ok": False, "message": "未收到文件"})
-                    return
-                raw = file_item.file.read()
-                fname = getattr(file_item, "filename", "") or ""
-                if raw:
-                    return self._process(raw, fname)
-            except Exception as e:
-                # FormData 解析失败不直接报错，降级到方式 B
-                pass
-
-        # ---- 尝试方式 B：原始字节流 + 头部密码 ----
+def _process_xlsx(raw_bytes, fname):
+    """解析 xlsx → 提交 GitHub → 返回结果字典。"""
+    fd, tmp = tempfile.mkstemp(suffix=".xlsx")
+    with os.fdopen(fd, "wb") as f:
+        f.write(raw_bytes)
+    try:
+        data = parse_workbook(tmp)
+    except Exception as e:
+        return _json_resp(400, {"ok": False, "message": f"解析失败：{e}"})
+    finally:
         try:
-            length = int(self.headers.get("Content-Length", 0))
-        except ValueError:
-            length = 0
-        raw = self.rfile.read(length) if length > 0 else b""
-        if not raw:
-            self._send(400, {"ok": False, "message": "未收到文件内容"})
-            return
+            os.remove(tmp)
+        except Exception:
+            pass
 
-        client_pw = self.headers.get("X-Admin-Pw", "")
-        if admin_pw and client_pw != admin_pw:
-            self._send(403, {"ok": False, "message": "密码错误"})
-            return
-        fname = self.headers.get("X-File-Name", "") or ""
+    m = re.search(r"(\d{8})", fname)
+    data["version"] = m.group(1) if m else datetime.now().strftime("%Y%m%d")
+    data["source_file"] = fname
+    data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        return self._process(raw, fname)
+    repo = _env("GITHUB_REPO", "")
+    gh_token = _env("GITHUB_TOKEN", "")
+    branch = _env("GITHUB_BRANCH", "main")
+    if not repo or not gh_token:
+        return _json_resp(500, {"ok": False, "message": "服务端配置缺失"})
 
-    def _process(self, raw, fname):
-        """解析 xlsx → 提交 GitHub → 返回结果。"""
-        # 暂存并解析
-        fd, tmp = tempfile.mkstemp(suffix=".xlsx")
-        with os.fdopen(fd, "wb") as f:
-            f.write(raw)
-        try:
-            data = parse_workbook(tmp)
-        except Exception as e:
-            self._send(400, {"ok": False, "message": f"解析失败：{e}"})
-            return
-        finally:
-            try:
-                os.remove(tmp)
-            except Exception:
-                pass
-
-        # 版本/来源/时间
-        m = re.search(r"(\d{8})", fname)
-        data["version"] = m.group(1) if m else datetime.now().strftime("%Y%m%d")
-        data["source_file"] = fname
-        data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-        # 提交到 GitHub
-        repo = _env("GITHUB_REPO", "")
-        gh_token = _env("GITHUB_TOKEN", "")
-        branch = _env("GITHUB_BRANCH", "main")
-        if not repo or not gh_token:
-            self._send(500, {"ok": False, "message": "服务端配置缺失"})
-            return
-
-        content = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
-        st, _ = _gh_upload_file(
-            repo, gh_token, branch, "prices.json", content,
-            message="update prices.json via public upload",
-        )
-        if st in (200, 201):
-            ch = sum(len(v.get("channels", [])) for v in data.get("countries", {}).values())
-            self._send(200, {
-                "ok": True,
-                "version": data["version"],
-                "channel_count": ch,
-                "fba_count": len(data.get("fba_map", {})),
-                "message": "价表已提交，公网约 1 分钟生效",
-            })
-        else:
-            self._send(500, {"ok": False, "message": f"提交失败（HTTP {st}）"})
+    content = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
+    st, _ = _gh_upload_file(
+        repo, gh_token, branch, "prices.json", content,
+        message="update prices.json via public upload",
+    )
+    if st in (200, 201):
+        ch = sum(len(v.get("channels", [])) for v in data.get("countries", {}).values())
+        return _json_resp(200, {
+            "ok": True,
+            "version": data["version"],
+            "channel_count": ch,
+            "fba_count": len(data.get("fba_map", {})),
+            "message": "价表已提交，公网约 1 分钟生效",
+        })
+    else:
+        return _json_resp(500, {"ok": False, "message": f"提交失败（HTTP {st}）"})
 
 
-if __name__ == "__main__":
-    from http.server import HTTPServer
-    HTTPServer(("127.0.0.1", 3000), handler).serve_forever()
+# ── Vercel 入口函数 ──────────────────────────────────────────────
+def handler(request):
+    """
+    Vercel Python 函数入口。
+    request 是 Vercel Request 对象，有 method/body/headers 等属性。
+    返回 dict（自动转为 HTTP Response）。
+    """
+    # OPTIONS 预检
+    if request.method == "OPTIONS":
+        return {
+            "statusCode": 204,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "*",
+            },
+            "body": "",
+        }
+
+    # 只接受 POST
+    if request.method != "POST":
+        return _json_resp(405, {"ok": False, "message": "仅支持 POST"})
+
+    admin_pw = _env("ADMIN_PW", "")
+    content_type = request.headers.get("content-type", "")
+
+    raw = b""
+    fname = ""
+    client_pw = ""
+
+    # 方式 A：multipart/form-data（FormData）
+    if "multipart/form-data" in content_type:
+        body_raw = request.body
+        if isinstance(body_raw, str):
+            body_raw = body_raw.encode("latin-1")
+
+        boundary = ""
+        for part in content_type.split(";"):
+            part = part.strip()
+            if part.startswith("boundary="):
+                boundary = part[len("boundary="):].strip('"')
+                break
+
+        if boundary and body_raw:
+            parts = body_raw.split(f"--{boundary}".encode())
+            for p in parts[1:-1]:  # skip first (preamble) and last (epilogue)
+                header_end = p.find(b"\r\n\r\n")
+                if header_end < 0:
+                    continue
+                part_headers = p[:header_end].decode("latin-1", errors="replace")
+                part_data = p[header_end + 4:].rstrip(b"\r\n")
+
+                # 跳过末尾的 -- 如果存在
+                if part_data.endswith(b"--"):
+                    part_data = part_data[:-2].rstrip(b"\r\n")
+
+                cd_line = [l for l in part_headers.split("\r\n") if l.lower().startswith("content-disposition:")]
+                if not cd_line:
+                    continue
+                cd = cd_line[0]
+
+                if 'name="pw"' in cd or 'name="pw"' in cd:
+                    client_pw = part_data.decode("utf-8", errors="replace")
+                elif 'name="file"' in cd:
+                    raw = part_data
+                    fn_match = re.search(r'filename="(.+)"', cd)
+                    if fn_match:
+                        fname = fn_match.group(1)
+
+    # 方式 B：原始字节流（降级 / 兼容旧前端）
+    if not raw:
+        body = request.body
+        if isinstance(body, str):
+            raw = body.encode("latin-1")
+        elif isinstance(body, bytes):
+            raw = body
+        client_pw = request.headers.get("x-admin-pw", "")
+        fname = request.headers.get("x-file-name", "") or ""
+
+    # 密码校验
+    if admin_pw and client_pw != admin_pw:
+        return _json_resp(403, {"ok": False, "message": "密码错误或无权限"})
+
+    if not raw:
+        return _json_resp(400, {"ok": False, "message": "未收到文件内容"})
+
+    return _process_xlsx(raw, fname)
