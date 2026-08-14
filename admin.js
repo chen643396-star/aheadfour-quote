@@ -6,7 +6,7 @@ const $ = (s) => document.querySelector(s);
 const NAV_PW = 'aheadfour888'; // 与内网管理密码一致
 
 // ⚠️ 部署后由 agent 替换为真实 Vercel 函数地址（形如 https://xxx.vercel.app/api/upload）
-const UPLOAD_API = 'https://<YOUR-VERCEL-PROJECT>.vercel.app/api/upload';
+const UPLOAD_API = 'https://aheadfour-quote.vercel.app/api/upload';
 
 const toast = (m, e = false) => {
   const t = $("#toast");
