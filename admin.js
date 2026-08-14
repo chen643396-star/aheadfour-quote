@@ -75,7 +75,6 @@ async function doUpload(file) {
       method: "POST",
       headers: {
         "X-Admin-Pw": $("#pw").value,
-        "X-File-Name": file.name,
         "Content-Type": "application/octet-stream",
       },
       body: buf,
