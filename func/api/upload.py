@@ -1,18 +1,21 @@
 """
 前晋四公网站 · 上传价表 Serverless 函数（Vercel Python）
 
-接收公网 admin 页 POST 的 xlsx 原始字节（带 X-Admin-Pw 密码头），
+接收公网 admin 页 POST 的 xlsx 文件，
 解析为 prices 结构后，通过 GitHub Contents API 把 prices.json 提交到价表仓库，
 GitHub Pages 检测到推送即自动重建，公网站约 1 分钟生效。
 
-仅提交 prices.json；schemes.json（海卡/代理公式渠道）保持仓库现状，
-满足「代理报价表不与主表混用」约束。
+仅提交 prices.json；schemes.json（海卡/代理公式渠道）保持仓库现状。
 
-环境变量（在 Vercel 后台加密填写，不进代码）：
-  ADMIN_PW      管理密码，与内网站一致
-  GITHUB_TOKEN  fine-grained PAT，需 Contents 读写
-  GITHUB_REPO   价表仓库，如 chen643396-star/aheadfour-quote
-  GITHUB_BRANCH 发布分支，默认 main
+支持两种上传格式（自动检测）：
+  - multipart/form-data（FormData）：字段 file=文件, pw=密码
+  - application/octet-stream（原始字节）：头 X-Admin-Pw=密码
+
+环境变量：
+  ADMIN_PW      管理密码
+  GITHUB_TOKEN  fine-grained PAT（Contents 读写）
+  GITHUB_REPO   价表仓库
+  GITHUB_BRANCH 分支（默认 main）
 """
 import os
 import re
@@ -26,9 +29,7 @@ import urllib.error
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 
-# 确保 func/ 根目录在 sys.path，便于 import parser_xlsx
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from parser_xlsx import parse_workbook  # noqa: E402
 
 
@@ -37,7 +38,6 @@ def _env(name, default=None):
 
 
 def _gh_api(method, path, token, data=None):
-    """GitHub REST API 调用（urllib，自带 SSL，不依赖 git 协议）。"""
     url = "https://api.github.com" + path
     headers = {
         "Authorization": f"Bearer {token}",
@@ -58,7 +58,6 @@ def _gh_api(method, path, token, data=None):
 
 
 def _gh_upload_file(repo, token, branch, path_rel, content_bytes, message=None):
-    """创建/更新仓库内单个文件（Contents API）。"""
     st, cur = _gh_api("GET", f"/repos/{repo}/contents/{path_rel}?ref={branch}", token)
     sha = cur.get("sha") if st == 200 else None
     data = {
@@ -97,44 +96,60 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        # 1) 解析 FormData（兼容性最好，不再依赖自定义请求头）
-        content_type = self.headers.get("Content-Type", "")
-        if "multipart/form-data" not in content_type:
-            self._send(400, {"ok": False, "message": "请使用 FormData 格式上传"})
-            return
-
-        try:
-            form = cgi.FieldStorage(
-                fp=self.rfile,
-                headers=self.headers,
-                environ={
-                    "REQUEST_METHOD": "POST",
-                    "CONTENT_TYPE": content_type,
-                },
-            )
-        except Exception as e:
-            self._send(400, {"ok": False, "message": f"解析上传数据失败：{e}"})
-            return
-
-        # 2) 密码校验（从 FormData 字段 pw 读取）
         admin_pw = _env("ADMIN_PW", "")
-        client_pw = form.getvalue("pw", "")
-        if not admin_pw or client_pw != admin_pw:
-            self._send(403, {"ok": False, "message": "密码错误或无权限"})
-            return
+        content_type = self.headers.get("Content-Type", "")
 
-        # 3) 读取 xlsx 文件
-        file_item = form["file"]
-        if not file_item or not file_item.file:
-            self._send(400, {"ok": False, "message": "未收到文件"})
-            return
-        raw = file_item.file.read()
+        # ---- 尝试方式 A：multipart/form-data（FormData）----
+        if "multipart/form-data" in content_type:
+            try:
+                form = cgi.FieldStorage(
+                    fp=self.rfile,
+                    headers=self.headers,
+                    environ={
+                        "REQUEST_METHOD": "POST",
+                        "CONTENT_TYPE": content_type,
+                    },
+                )
+                client_pw = form.getvalue("pw", "")
+                if not client_pw:
+                    client_pw = self.headers.get("X-Admin-Pw", "")
+                if admin_pw and client_pw != admin_pw:
+                    self._send(403, {"ok": False, "message": "密码错误"})
+                    return
+
+                file_item = form.getfirst("file") if "file" in form else None
+                if not file_item or not hasattr(file_item, "file"):
+                    self._send(400, {"ok": False, "message": "未收到文件"})
+                    return
+                raw = file_item.file.read()
+                fname = getattr(file_item, "filename", "") or ""
+                if raw:
+                    return self._process(raw, fname)
+            except Exception as e:
+                # FormData 解析失败不直接报错，降级到方式 B
+                pass
+
+        # ---- 尝试方式 B：原始字节流 + 头部密码 ----
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+        except ValueError:
+            length = 0
+        raw = self.rfile.read(length) if length > 0 else b""
         if not raw:
-            self._send(400, {"ok": False, "message": "文件内容为空"})
+            self._send(400, {"ok": False, "message": "未收到文件内容"})
             return
-        fname = file_item.filename or ""
 
-        # 4) 暂存并解析（与内网站 reparse_and_save 逻辑一致）
+        client_pw = self.headers.get("X-Admin-Pw", "")
+        if admin_pw and client_pw != admin_pw:
+            self._send(403, {"ok": False, "message": "密码错误"})
+            return
+        fname = self.headers.get("X-File-Name", "") or ""
+
+        return self._process(raw, fname)
+
+    def _process(self, raw, fname):
+        """解析 xlsx → 提交 GitHub → 返回结果。"""
+        # 暂存并解析
         fd, tmp = tempfile.mkstemp(suffix=".xlsx")
         with os.fdopen(fd, "wb") as f:
             f.write(raw)
@@ -149,18 +164,18 @@ class handler(BaseHTTPRequestHandler):
             except Exception:
                 pass
 
-        # 5) 版本/来源/时间（与内网站保持一致）
+        # 版本/来源/时间
         m = re.search(r"(\d{8})", fname)
         data["version"] = m.group(1) if m else datetime.now().strftime("%Y%m%d")
         data["source_file"] = fname
         data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # 6) 提交 prices.json 到 GitHub 仓库
+        # 提交到 GitHub
         repo = _env("GITHUB_REPO", "")
         gh_token = _env("GITHUB_TOKEN", "")
         branch = _env("GITHUB_BRANCH", "main")
         if not repo or not gh_token:
-            self._send(500, {"ok": False, "message": "GitHub 配置缺失（环境变量未设置）"})
+            self._send(500, {"ok": False, "message": "服务端配置缺失"})
             return
 
         content = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
@@ -169,7 +184,7 @@ class handler(BaseHTTPRequestHandler):
             message="update prices.json via public upload",
         )
         if st in (200, 201):
-            ch = sum(len(v["channels"]) for v in data["countries"].values())
+            ch = sum(len(v.get("channels", [])) for v in data.get("countries", {}).values())
             self._send(200, {
                 "ok": True,
                 "version": data["version"],
@@ -178,10 +193,9 @@ class handler(BaseHTTPRequestHandler):
                 "message": "价表已提交，公网约 1 分钟生效",
             })
         else:
-            self._send(500, {"ok": False, "message": f"提交 GitHub 失败（HTTP {st}）"})
+            self._send(500, {"ok": False, "message": f"提交失败（HTTP {st}）"})
 
 
-# Vercel 旧版 Python 运行时也兼容 __main__ 直接执行（本地调试用）
 if __name__ == "__main__":
     from http.server import HTTPServer
     HTTPServer(("127.0.0.1", 3000), handler).serve_forever()
