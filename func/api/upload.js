@@ -1,5 +1,5 @@
 /**
- * 前晋四公网站 · 上传价表 Serverless 函数（Vercel Node.js · fetch 格式）
+ * 前晋四公网站 · 上传价表 Serverless 函数（Vercel Node.js · ESM + fetch 格式）
  *
  * 接收公网 admin 页 POST 的 xlsx 文件（FormData），
  * 用 SheetJS 解析为 prices 结构后，通过 GitHub Contents API 提交 prices.json 到仓库，
@@ -11,7 +11,7 @@
  *   GITHUB_REPO   价表仓库
  *   GITHUB_BRANCH 分支（默认 main）
  */
-const xlsx = require("xlsx");
+import XLSX from "xlsx";
 
 // ── 国家 sheet 映射 ──────────────────────────────────────────────
 const COUNTRY_SHEETS = { US: "美国", UK: "英国", EU: "欧洲", CA: "加拿大" };
@@ -65,9 +65,9 @@ function volDivisor(transport) {
 
 // ── 找表头行 ─────────────────────────────────────────────────────
 function findHeaderRow(ws, maxScan = 20) {
-  const range = xlsx.utils.decode_range(ws["!ref"] || "A1");
+  const range = XLSX.utils.decode_range(ws["!ref"] || "A1");
   for (let r = 0; r < Math.min(maxScan, range.e.r); r++) {
-    const val = ws[xlsx.utils.encode_cell({ r, c: 1 })]; // B列 = col 1
+    const val = ws[XLSX.utils.encode_cell({ r, c: 1 })];
     if (val && val.v === HEADER_NAME) return r;
   }
   return null;
@@ -75,7 +75,7 @@ function findHeaderRow(ws, maxScan = 20) {
 
 // ── 读取单元格值辅助 ────────────────────────────────────────────
 function cellVal(ws, r, c) {
-  const addr = xlsx.utils.encode_cell({ r, c });
+  const addr = XLSX.utils.encode_cell({ r, c });
   const cell = ws[addr];
   return cell ? cell.v : undefined;
 }
@@ -85,7 +85,7 @@ function parseCountry(ws) {
   const hdr = findHeaderRow(ws);
   if (hdr === null) return [];
 
-  const range = xlsx.utils.decode_range(ws["!ref"] || "A1");
+  const range = XLSX.utils.decode_range(ws["!ref"] || "A1");
   const lastCol = range.e.c;
   const maxRow = range.e.r;
 
@@ -105,10 +105,9 @@ function parseCountry(ws) {
   }
 
   while (r <= maxRow) {
-    const name = cellVal(ws, r, 1); // B列
-    const code = cellVal(ws, r, 2); // C列
+    const name = cellVal(ws, r, 1);
+    const code = cellVal(ws, r, 2);
 
-    // 表头行：重新解析价格分层列
     if (name === HEADER_NAME) {
       tierCols = [];
       for (let c = 3; c <= lastCol; c++) {
@@ -122,10 +121,9 @@ function parseCountry(ws) {
       continue;
     }
 
-    const zone = cellVal(ws, r, 3); // D列
+    const zone = cellVal(ws, r, 3);
 
     if (name) {
-      // 新渠道
       const transport = cellStr(cellVal(ws, r, 8));
       const f = readZoneFields(r, null);
       const tiers = {};
@@ -162,15 +160,11 @@ function parseCountry(ws) {
         });
       }
     } else if (zone && cur) {
-      // 分区子行
       const tiers = {};
       let hasPrice = false;
       for (const tc of tierCols) {
         const p = toNum(cellVal(ws, r, tc.col));
-        if (p !== null) {
-          tiers[tc.minW] = p;
-          hasPrice = true;
-        }
+        if (p !== null) { tiers[tc.minW] = p; hasPrice = true; }
       }
       if (!hasPrice && cur.zones.length > 0) {
         Object.assign(tiers, cur.zones[cur.zones.length - 1].tiers);
@@ -194,10 +188,10 @@ function parseCountry(ws) {
 // ── 解析 FBA 映射 sheet ─────────────────────────────────────────
 function parseFba(ws) {
   const out = {};
-  const range = xlsx.utils.decode_range(ws["!ref"] || "A1");
+  const range = XLSX.utils.decode_range(ws["!ref"] || "A1");
   for (let r = 1; r <= range.e.r; r++) {
-    const channel = cellVal(ws, r, 0); // A列
-    const codeRaw = cellVal(ws, r, 1); // B列
+    const channel = cellVal(ws, r, 0);
+    const codeRaw = cellVal(ws, r, 1);
     if (!channel && !codeRaw) continue;
     const code = normCode(codeRaw);
     const tiers = {};
@@ -205,7 +199,7 @@ function parseFba(ws) {
       const p = toNum(cellVal(ws, r, c));
       if (p !== null) tiers[mn] = p;
     });
-    const lead = cellStr(cellVal(ws, r, 5)); // F列
+    const lead = cellStr(cellVal(ws, r, 5));
     const entry = { channel: String(channel).trim(), tiers, lead };
     if (!out[code]) out[code] = [];
     out[code].push(entry);
@@ -216,7 +210,7 @@ function parseFba(ws) {
 // ── 解析船期表 ───────────────────────────────────────────────────
 function parseVessel(ws) {
   const out = [];
-  const range = xlsx.utils.decode_range(ws["!ref"] || "A1");
+  const range = XLSX.utils.decode_range(ws["!ref"] || "A1");
   for (let r = 3; r <= range.e.r; r++) {
     const channel = cellVal(ws, r, 1);
     if (!channel) continue;
@@ -259,7 +253,7 @@ function parseNotice(ws) {
   };
 
   const longTextNodes = ["时效免赔说明", "签收免赔情况说明", "赔偿标准", "索赔程序", "保险索赔流程"];
-  const range = xlsx.utils.decode_range(ws["!ref"] || "A1");
+  const range = XLSX.utils.decode_range(ws["!ref"] || "A1");
 
   let lastNode = null;
   let lastCharge = null;
@@ -288,9 +282,7 @@ function parseNotice(ws) {
     }
 
     const byCountry = {};
-    [
-      ["US", us], ["UK", uk], ["EU", eu], ["CA", ca],
-    ].forEach(([k, v]) => {
+    [["US", us], ["UK", uk], ["EU", eu], ["CA", ca]].forEach(([k, v]) => {
       if (v != null && v !== "" && v !== "/") byCountry[k] = v;
     });
 
@@ -327,7 +319,7 @@ function parseDirectory(ws) {
     }
   }
   let website = null;
-  const range = xlsx.utils.decode_range(ws["!ref"] || "A1");
+  const range = XLSX.utils.decode_range(ws["!ref"] || "A1");
   for (let r = 0; r < Math.min(9, range.e.r); r++) {
     const v = cellVal(ws, r, 1);
     if (v && /aheadfour/i.test(String(v))) { website = String(v).trim(); break; }
@@ -337,7 +329,7 @@ function parseDirectory(ws) {
 
 // ── 主解析入口 ───────────────────────────────────────────────────
 function parseWorkbook(buffer) {
-  const wb = xlsx.read(buffer, { type: "buffer", cellDates: true });
+  const wb = XLSX.read(buffer, { type: "buffer", cellDates: true });
 
   const countries = {};
   for (const [key, sheet] of Object.entries(COUNTRY_SHEETS)) {
@@ -346,7 +338,6 @@ function parseWorkbook(buffer) {
     countries[key] = { name: sheet, channels: parseCountry(ws) };
   }
 
-  // FBA 映射
   const fbaMap = parseFba(wb.Sheets["参考"] || {});
   const nameToCode = {};
   for (const cobj of Object.values(countries)) {
@@ -426,7 +417,6 @@ export default async function handler(request) {
 
   const adminPw = process.env.ADMIN_PW || "";
 
-  // 用 Vercel 原生 formData() 解析 multipart
   let pw = "";
   let fileBuffer = null;
   let fileName = "";
@@ -440,7 +430,6 @@ export default async function handler(request) {
       fileBuffer = Buffer.from(await file.arrayBuffer());
     }
   } catch (e) {
-    // 降级：尝试读取原始 body
     const ct = request.headers.get("content-type") || "";
     if (ct.includes("application/octet-stream") || ct.includes("application/vnd.openxmlformats-officedocument")) {
       fileBuffer = Buffer.from(await request.arrayBuffer());
@@ -454,7 +443,6 @@ export default async function handler(request) {
     }
   }
 
-  // 密码校验
   if (adminPw && pw !== adminPw) {
     return Response.json(
       { ok: false, message: "密码错误或无权限" },
@@ -469,7 +457,6 @@ export default async function handler(request) {
     );
   }
 
-  // 解析 xlsx
   let data;
   try {
     data = parseWorkbook(fileBuffer);
@@ -481,13 +468,11 @@ export default async function handler(request) {
     );
   }
 
-  // 版本/来源
   const verMatch = fileName.match(/(\d{8})/);
   data.version = verMatch ? verMatch[1] : new Date().toISOString().slice(0, 10).replace(/-/g, "");
   data.source_file = fileName;
   data.updated_at = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-  // 提交到 GitHub
   const repo = process.env.GITHUB_REPO || "";
   const ghToken = process.env.GITHUB_TOKEN || "";
   const branch = process.env.GITHUB_BRANCH || "main";
