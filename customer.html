@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前晋四 AHEADFOUR · 在线查价</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 20L12 4l9 16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 20h9" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="13" r="2.1" fill="#14224a"/></svg>
+    </span>
+    <span class="name">前晋四 AHEADFOUR<small>TECH LOGISTICS · 在线查价</small></span>
+  </div>
+  <nav class="topnav">
+    <a href="index.html">报价工作台</a>
+    <a href="customer.html" class="active">客户查价</a>
+    <a href="admin.html">价表管理</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>欢迎使用前晋四在线查价</h1>
+    <p>输入您的目的地与货件信息，即可实时获取跨境物流参考报价。最终以正式报价单为准，大货与特殊品名建议联系我司业务确认。</p>
+  </section>
+
+  <!-- 智能识别：粘贴需求自动填单 -->
+  <div class="card intake-card mt">
+    <div class="section-title"><span class="dot"></span>📋 智能识别 · 粘贴需求自动填单</div>
+    <p class="muted">把您的货件信息整段粘进来，系统自动识别国家 / 邮编 / 重量 / 尺寸并填好，点击「获取报价」即可。</p>
+    <textarea id="intakeText" placeholder="例：&#10;产品：铝合金卷帘门，不带电磁&#10;木箱包装尺寸：5.61*0.51*0.41m&#10;重量 255kg&#10;DDP美国马里兰州Jarrettsville 邮编：21084"></textarea>
+    <div class="intake-actions">
+      <button class="btn btn-accent" id="intakeBtn"><span>⚡ 自动识别并报价</span></button>
+      <button class="btn btn-ghost" id="intakeClear"><span>清空</span></button>
+    </div>
+    <div id="intakeResult"></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="section-title"><span class="dot"></span>查价信息</div>
+
+      <div class="field">
+        <label>目的国家 / 地区</label>
+        <div class="chips" id="countryChips"></div>
+      </div>
+
+      <div class="field">
+        <label for="channel">物流渠道</label>
+        <select id="channel"><option value="">不选则自动匹配（推荐）</option></select>
+        <div class="hint" id="channelHint"></div>
+      </div>
+
+      <div class="field">
+        <label for="dest">目的仓 / 邮编 / FBA 仓码</label>
+        <input type="text" id="dest" placeholder="如 ONT8 / 0-9 / 1区" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>货件参数</label>
+        <div class="dims">
+          <div><label>实重 (kg)</label><input type="number" id="weight" min="0" step="0.5" placeholder="30"></div>
+          <div><label>件数</label><input type="number" id="pieces" min="1" step="1" value="1"></div>
+          <div><label>材积重(可选)</label><input type="number" id="cw" min="0" step="0.5" placeholder="系统算"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>单件尺寸 (cm)</label>
+        <div class="dims">
+          <div><label>长</label><input type="number" id="len" min="0" step="1" placeholder="40"></div>
+          <div><label>宽</label><input type="number" id="wid" min="0" step="1" placeholder="30"></div>
+          <div><label>高</label><input type="number" id="hei" min="0" step="1" placeholder="30"></div>
+        </div>
+      </div>
+
+      <button class="btn btn-accent btn-block" id="quoteBtn"><span>🔍 获取报价</span></button>
+      <p class="muted" style="font-size:12px;margin-top:10px;text-align:center">本报价为系统参考价，不含关税与目的地税费。</p>
+    </div>
+
+    <div class="card quote-card" id="resultCard">
+      <div class="quote-empty" id="quoteEmpty">
+        <div class="ic">🌍</div>
+        <p>填写左侧信息，点击「获取报价」<br>参考报价将显示在这里</p>
+      </div>
+      <div id="quoteBody" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="card mt">
+    <div class="section-title"><span class="dot"></span>发货须知 · 计费与附加费</div>
+    <div class="acc" id="noticeAcc"></div>
+  </div>
+
+  <div class="footer">前晋四（深圳）国际物流有限公司 · AHEADFOUR TECH LOGISTICS ｜ 服务热线请洽我司业务</div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="quote-engine.js"></script>
+<script src="customer.js"></script>
+</body>
+</html>
