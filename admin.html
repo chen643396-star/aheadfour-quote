@@ -42,12 +42,16 @@
 
   <div id="adminMain" style="display:none">
   <div class="grid-2">
-    <!-- 上传（公网站只读，跳内网） -->
+    <!-- 上传（公网站可上传，走云端函数） -->
     <div class="card">
-      <div class="section-title"><span class="dot"></span>📥 上传新价表（仅限内网）</div>
-      <div class="callout warn"><span class="ic">🔒</span><div>公网站为<b>只读镜像</b>，价表上传与替换请在前晋四<b>内网后台</b>操作。</div></div>
-      <a class="btn btn-primary btn-block mt" id="goInternalBtn" href="http://192.168.0.103:5000/admin" target="_blank" rel="noopener">🖥️ 前往内网后台上传</a>
-      <div class="callout" style="margin-top:14px"><span class="ic">📌</span><div>内网地址：<b>http://192.168.0.103:5000/admin</b>（需连接同一局域网 / Wi-Fi）。</div></div>
+      <div class="section-title"><span class="dot"></span>📥 上传新价表</div>
+      <p class="muted">选择本周 Excel 价表（.xlsx），点击上传，系统自动解析并同步公网（约 1 分钟生效）。</p>
+      <div class="field">
+        <label for="fileInput">Excel 价表文件</label>
+        <input type="file" id="fileInput" accept=".xlsx,.xls">
+      </div>
+      <button class="btn btn-primary btn-block mt" id="uploadBtn"><span>⬆️ 上传并更新价表</span></button>
+      <div class="callout" style="margin-top:14px"><span class="ic">🗂️</span><div>历史版本与回滚仍请在 <b>内网 /admin</b> 操作。</div></div>
     </div>
 
     <!-- 当前版本（只读，来自本地价表） -->
