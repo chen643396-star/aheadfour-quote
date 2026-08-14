@@ -70,14 +70,12 @@ async function doUpload(file) {
   btn.disabled = true;
   toast("上传中，解析并同步公网，请稍候…");
   try {
-    const buf = await file.arrayBuffer();
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("pw", $("#pw").value);
     const res = await fetch(UPLOAD_API, {
       method: "POST",
-      headers: {
-        "X-Admin-Pw": $("#pw").value,
-        "Content-Type": "application/octet-stream",
-      },
-      body: buf,
+      body: fd,  // FormData 自动设 Content-Type（含 boundary），不手动设头
     });
     let j = {};
     try { j = await res.json(); } catch (_) {}
