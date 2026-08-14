@@ -1,1 +1,1 @@
-{"name": "aheadfour-upload-fn", "version": "1.0.0", "dependencies": {"xlsx": "^0.18.5"}}
+{"name": "aheadfour-upload-fn", "version": "1.0.0", "type": "module", "dependencies": {"xlsx": "^0.18.5"}}
