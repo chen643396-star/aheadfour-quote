@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前晋四 AHEADFOUR · 共享报价工作台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 20L12 4l9 16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 20h9" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="13" r="2.1" fill="#14224a"/></svg>
+    </span>
+    <span class="name">前晋四 AHEADFOUR<small>TECH LOGISTICS · 共享报价工作台</small></span>
+  </div>
+  <nav class="topnav">
+    <a href="index.html" class="active">报价工作台</a>
+    <a href="customer.html">客户查价</a>
+    <a href="admin.html">价表管理</a>
+    <span class="ver" id="verPill">价表 v—</span>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>跨境电商物流 · 一键自动报价</h1>
+    <p>选择目的国与渠道，录入重量与尺寸，系统按最新价表自动核算运费、清关、报关及超长超重附加费，并附渠道备注与发货须知，随时可发给客户。</p>
+    <div class="stats">
+      <div class="stat"><b id="stCh">—</b><span>在册渠道</span></div>
+      <div class="stat"><b id="stCo">—</b><span>服务国家</span></div>
+      <div class="stat"><b id="stFba">—</b><span>FBA 仓码映射</span></div>
+      <div class="stat"><b id="stVer">—</b><span>价表版本</span></div>
+    </div>
+  </section>
+
+  <!-- 智能识别：粘贴产品描述自动填单 -->
+  <div class="card intake-card mt">
+    <div class="section-title"><span class="dot"></span>📋 智能识别 · 粘贴客户模板自动填单</div>
+    <p class="muted">很多客户用固定模板发需求，把整段文字粘进来，系统自动识别 <b>国家 / 邮编 / 重量 / 尺寸 / 是否带电</b> 并自动分类填充到下方报价单（识别结果可核对后修改）。</p>
+    <textarea id="intakeText" placeholder="例：&#10;产品：铝合金卷帘门，不带电磁&#10;木箱包装尺寸：5.61*0.51*0.41m&#10;重量 255kg&#10;DDP美国马里兰州Jarrettsville 邮编：21084"></textarea>
+    <div class="intake-actions">
+      <button class="btn btn-accent" id="intakeBtn"><span>⚡ 自动识别并填充</span></button>
+      <button class="btn btn-ghost" id="intakeClear"><span>清空</span></button>
+    </div>
+    <div id="intakeResult"></div>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- 左：配置 -->
+    <div class="card">
+      <div class="section-title"><span class="dot"></span>报价配置<button class="btn btn-ghost btn-sm" id="quoteClear" style="float:right;margin-top:-2px">↺ 重置</button></div>
+
+      <div class="field">
+        <label>目的国家</label>
+        <div class="chips" id="countryChips"></div>
+      </div>
+
+      <div class="field">
+        <label for="channel">物流渠道</label>
+        <select id="channel"><option value="">不选则自动匹配（推荐）</option></select>
+        <div class="hint" id="channelHint">选择目的国后可手动指定渠道；留空则系统根据货物重量/尺寸自动匹配最优渠道（重货优先海卡航、轻货优先快递空运）</div>
+      </div>
+
+      <div class="field">
+        <label for="dest">目的仓 · 邮编区段 · FBA 仓码</label>
+        <input type="text" id="dest" placeholder="如 ONT8 / 0-9 / 1区 / 温哥华" autocomplete="off">
+        <div class="hint">填 FBA 仓码（如 ONT8）可自动识别国家与渠道；填邮编或分区也可匹配。</div>
+      </div>
+
+      <div class="field">
+        <label>货物参数</label>
+        <div class="dims">
+          <div><label>实重 (kg)</label><input type="number" id="weight" min="0" step="0.5" placeholder="30"></div>
+          <div><label>件数</label><input type="number" id="pieces" min="1" step="1" value="1"></div>
+          <div><label>计费重(可选)</label><input type="number" id="cw" min="0" step="0.5" placeholder="系统算"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>单件尺寸 (cm)</label>
+        <div class="dims">
+          <div><label>长</label><input type="number" id="len" min="0" step="1" placeholder="40"></div>
+          <div><label>宽</label><input type="number" id="wid" min="0" step="1" placeholder="30"></div>
+          <div><label>高</label><input type="number" id="hei" min="0" step="1" placeholder="30"></div>
+        </div>
+        <div class="hint">用于计算材积重（快递 ÷5000 / 专线 ÷6000）及超长超重判定。</div>
+      </div>
+
+      <div class="field">
+        <label>货物属性 · 触发式计费（自动识别，可手动修正）</label>
+        <div class="attr-panel">
+          <div class="attr-chips">
+            <label class="attr-chk"><input type="checkbox" id="at_paste"><span>膏体</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_liquid"><span>液体</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_high_value"><span>高货值品类</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_high_tax"><span>高税率品类</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_high_check"><span>高查验率品类</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_magnetic"><span>带磁</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_powered"><span>带电/含电池</span></label>
+            <label class="attr-chk"><input type="checkbox" id="at_ciq"><span>需商检</span></label>
+          </div>
+          <div class="attr-row">
+            <label>申报品名数<input type="number" id="at_names" min="1" value="1" style="width:64px"></label>
+            <label>货值(元)<input type="number" id="at_value" min="0" placeholder="选填" style="width:96px"></label>
+            <label>地址类型
+              <select id="at_addr">
+                <option value="">未填</option>
+                <option value="commercial">商业</option>
+                <option value="residential">私人</option>
+                <option value="remote">偏远</option>
+                <option value="ultra_remote">超偏远</option>
+              </select>
+            </label>
+          </div>
+          <div class="hint">勾选后系统按《费用触发规则手册》自动计收对应附加费；未填项以「单询」提示、不计入总价。强制认证(FDA/CE 等)由识别自动带入，可在上方识别结果中查看。</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="quoteBtn">
+        <span>⚡ 立即报价</span>
+      </button>
+    </div>
+
+    <!-- 右：结果 -->
+    <div class="card quote-card" id="resultCard">
+      <div class="quote-empty" id="quoteEmpty">
+        <div class="ic">📦</div>
+        <p>填写左侧参数，点击「立即报价」<br>报价单将显示在这里</p>
+      </div>
+      <div id="quoteBody" style="display:none"></div>
+    </div>
+
+  </div>
+
+  <!-- 发货须知 -->
+  <div class="card mt">
+    <div class="section-title"><span class="dot"></span>发货须知 · 计费与附加费规则</div>
+    <div class="acc" id="noticeAcc"></div>
+  </div>
+
+  <!-- 船期 + 国内仓 -->
+  <div class="grid-2 mt">
+    <div class="card">
+      <div class="section-title"><span class="dot"></span>船期表</div>
+      <div class="tbl-scroll" style="max-height:340px; overflow:auto">
+        <table class="tbl" id="vesselTbl">
+          <thead><tr><th>船司</th><th>船名 / 航次</th><th>目的港</th><th>开船</th><th>到港</th><th>截 SI</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title"><span class="dot"></span>国内揽收仓</div>
+      <div id="warehouses"></div>
+      <div class="callout" style="margin-top:14px">
+        <span class="ic">📮</span>
+        <div>以上为价表内公示的揽收仓与发货规则，报价单发出前请与客户再次核对最新船期与地址。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">前晋四（深圳）国际物流有限公司 · AHEADFOUR TECH LOGISTICS ｜ 内部共享工作台 · 价表每周可上传更新</div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="quote-engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
