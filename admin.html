@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前晋四 AHEADFOUR · 价表管理</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 20L12 4l9 16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 20h9" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="13" r="2.1" fill="#14224a"/></svg>
+    </span>
+    <span class="name">前晋四 AHEADFOUR<small>TECH LOGISTICS · 价表管理</small></span>
+  </div>
+  <nav class="topnav">
+    <a href="index.html">报价工作台</a>
+    <a href="customer.html">客户查价</a>
+    <a href="admin.html" class="active">价表管理</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>价表管理 · 每周上传更新</h1>
+    <p>上传新的 Excel 价表（.xlsx）即自动解析并替换当前价表，系统会<b>自动备份上一版</b>，可随时在历史中回查。团队访问的工作台将同步最新价格。</p>
+  </section>
+
+  <!-- 管理员密码门 -->
+  <div class="card gate-card" id="gateCard">
+    <div class="section-title"><span class="dot"></span>🔒 管理员验证</div>
+    <p class="muted">价表替换仅限前晋四内部管理员操作，请输入管理密码后进入。</p>
+    <div class="field">
+      <label for="pw">管理密码</label>
+      <input type="password" id="pw" placeholder="请输入管理密码" autocomplete="off">
+    </div>
+    <button class="btn btn-primary btn-block" id="loginBtn"><span>🔓 验证并进入</span></button>
+    <div class="callout warn" id="gateErr" style="display:none"><span class="ic">⚠️</span><div id="gateErrMsg"></div></div>
+  </div>
+
+  <div id="adminMain" style="display:none">
+  <div class="grid-2">
+    <!-- 上传（公网站只读，跳内网） -->
+    <div class="card">
+      <div class="section-title"><span class="dot"></span>📥 上传新价表（仅限内网）</div>
+      <div class="callout warn"><span class="ic">🔒</span><div>公网站为<b>只读镜像</b>，价表上传与替换请在前晋四<b>内网后台</b>操作。</div></div>
+      <a class="btn btn-primary btn-block mt" id="goInternalBtn" href="http://192.168.0.103:5000/admin" target="_blank" rel="noopener">🖥️ 前往内网后台上传</a>
+      <div class="callout" style="margin-top:14px"><span class="ic">📌</span><div>内网地址：<b>http://192.168.0.103:5000/admin</b>（需连接同一局域网 / Wi-Fi）。</div></div>
+    </div>
+
+    <!-- 当前版本（只读，来自本地价表） -->
+    <div class="card">
+      <div class="section-title"><span class="dot"></span>当前生效价表</div>
+      <div class="ver-card">
+        <div class="ic">📊</div>
+        <div class="meta">
+          <b id="curVer">v—</b>
+          <div id="curFile">—</div>
+          <div id="curTime">更新于 —</div>
+        </div>
+      </div>
+      <div class="row mt" id="curStats"></div>
+    </div>
+  </div>
+
+  <!-- 历史（公网站仅提示，跳内网） -->
+  <div class="card mt">
+    <div class="section-title"><span class="dot"></span>历史备份</div>
+    <div class="callout"><span class="ic">🗂️</span><div>历史版本与回滚操作仅限内网后台，请前往 <b>内网 /admin</b> 查看与管理。</div></div>
+  </div>
+  </div>
+
+  <div class="footer">前晋四（深圳）国际物流有限公司 · AHEADFOUR TECH LOGISTICS ｜ 价表变更请由管理员操作</div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="quote-engine.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
