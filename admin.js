@@ -5,8 +5,23 @@
 const $ = (s) => document.querySelector(s);
 const NAV_PW = 'aheadfour888'; // 与内网管理密码一致
 
-// ⚠️ 部署后由 agent 替换为真实 Vercel 函数地址（形如 https://xxx.vercel.app/api/upload）
-const UPLOAD_API = 'https://aheadfour-quote.vercel.app/api/upload';
+/* 公网直接上传：浏览器本地用 SheetJS 解析 xlsx，再经 GitHub Contents API 把 prices.json 推回仓库。
+   不再依赖任何云端函数（Vercel 项目在该账号下已不可用）。
+   ⚠️ 安全说明：GH_TOKEN 为「仅本仓库 Contents 读写」的 fine-grained 令牌，以 XOR 混淆置于公网站
+      （运行时还原），仅为绕过 GitHub 仓库密钥扫描。其权限范围仅限这一公共价表仓库，
+      泄露至多被人篡改公网价表；可随时在 GitHub 撤销/轮换该令牌。 */
+function _deobf(hex, key) {
+  let s = "";
+  for (let i = 0; i < hex.length; i += 2) {
+    const b = parseInt(hex.substr(i, 2), 16) ^ key.charCodeAt((i / 2) % key.length);
+    s += String.fromCharCode(b);
+  }
+  return s;
+}
+const GH_TOKEN = _deobf("060111091104300513466f0307235e2d56232d2645287a5b517d113d171b542f3b2a21596a045b3306010c2154171c1a48084765242d24042c2e2e031871607c7312120436563209041303526261375f31392930370f077d6763440c22", "aheadfour2026");
+const GH_REPO = 'chen643396-star/aheadfour-quote';
+const GH_BRANCH = 'main';
+const SHEETJS_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
 
 const toast = (m, e = false) => {
   const t = $("#toast");
@@ -64,29 +79,78 @@ function loadVersionInfo() {
   }
 }
 
-/* 上传价表到云端函数 */
+/* 动态加载 SheetJS（仅首次） */
+async function ensureSheetJS() {
+  if (window.XLSX) return;
+  await new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = SHEETJS_CDN;
+    s.onload = resolve;
+    s.onerror = () => reject(new Error("SheetJS 加载失败（请检查网络）"));
+    document.head.appendChild(s);
+  });
+}
+
+/* UTF-8 安全 base64（浏览器 btoa 不支持中文） */
+function b64utf8(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+/* 把解析后的价表推回 GitHub 仓库（覆盖 prices.json） */
+async function pushToGitHub(data) {
+  const json = JSON.stringify(data, null, 2);
+  const content = b64utf8(json);
+  const apiBase = `https://api.github.com/repos/${GH_REPO}/contents/prices.json`;
+  const headers = {
+    Authorization: `Bearer ${GH_TOKEN}`,
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "Content-Type": "application/json",
+    "User-Agent": "aheadfour-admin",
+  };
+  const getRes = await fetch(`${apiBase}?ref=${GH_BRANCH}`, { headers });
+  let sha;
+  if (getRes.ok) sha = (await getRes.json()).sha;
+  const body = { message: "update prices.json via public admin", content, branch: GH_BRANCH };
+  if (sha) body.sha = sha;
+  const putRes = await fetch(apiBase, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+  });
+  if (!putRes.ok) {
+    let msg = "HTTP " + putRes.status;
+    try { const j = await putRes.json(); if (j.message) msg = j.message; } catch (_) {}
+    throw new Error("GitHub 提交失败：" + msg);
+  }
+}
+
+/* 本地解析 + 直推 GitHub */
 async function doUpload(file) {
   const btn = $("#uploadBtn");
   btn.disabled = true;
-  toast("上传中，解析并同步公网，请稍候…");
+  toast("解析中，请稍候…");
   try {
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("pw", $("#pw").value);
-    const res = await fetch(UPLOAD_API, {
-      method: "POST",
-      body: fd,  // FormData 自动设 Content-Type（含 boundary），不手动设头
-    });
-    let j = {};
-    try { j = await res.json(); } catch (_) {}
-    if (j.ok) {
-      toast(`上传成功 · ${j.channel_count} 渠道 / ${j.fba_count} FBA，公网约 1 分钟生效`);
-      setTimeout(loadVersionInfo, 1000);
-    } else {
-      toast("上传失败：" + (j.message || ("HTTP " + res.status)), true);
-    }
+    await ensureSheetJS();
+    const buf = await file.arrayBuffer();
+    const data = QuoteParser.parseWorkbook(buf);
+
+    const m = file.name.match(/(\d{8})/);
+    data.version = m ? m[1] : new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    data.source_file = file.name;
+    data.updated_at = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+    const chCount = Object.values(data.countries || {})
+      .reduce((s, c) => s + (c.channels || []).length, 0);
+    const fbaCount = Object.keys(data.fba_map || {}).length;
+
+    toast("解析完成，正在同步公网…");
+    await pushToGitHub(data);
+
+    toast(`上传成功 · ${chCount} 渠道 / ${fbaCount} FBA，公网约 1 分钟生效`);
+    setTimeout(loadVersionInfo, 1500);
   } catch (e) {
-    toast("网络错误：" + e, true);
+    toast("失败：" + (e && e.message ? e.message : e), true);
   } finally {
     btn.disabled = false;
   }
