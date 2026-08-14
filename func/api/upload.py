@@ -19,6 +19,7 @@ import re
 import sys
 import json
 import base64
+import cgi
 import tempfile
 import urllib.request
 import urllib.error
@@ -73,7 +74,7 @@ def _gh_upload_file(repo, token, branch, path_rel, content_bytes, message=None):
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, X-Admin-Pw, X-File-Name",
+    "Access-Control-Allow-Headers": "*",
 }
 
 
@@ -96,24 +97,44 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        # 1) 密码校验
+        # 1) 解析 FormData（兼容性最好，不再依赖自定义请求头）
+        content_type = self.headers.get("Content-Type", "")
+        if "multipart/form-data" not in content_type:
+            self._send(400, {"ok": False, "message": "请使用 FormData 格式上传"})
+            return
+
+        try:
+            form = cgi.FieldStorage(
+                fp=self.rfile,
+                headers=self.headers,
+                environ={
+                    "REQUEST_METHOD": "POST",
+                    "CONTENT_TYPE": content_type,
+                },
+            )
+        except Exception as e:
+            self._send(400, {"ok": False, "message": f"解析上传数据失败：{e}"})
+            return
+
+        # 2) 密码校验（从 FormData 字段 pw 读取）
         admin_pw = _env("ADMIN_PW", "")
-        client_pw = self.headers.get("X-Admin-Pw", "")
+        client_pw = form.getvalue("pw", "")
         if not admin_pw or client_pw != admin_pw:
             self._send(403, {"ok": False, "message": "密码错误或无权限"})
             return
 
-        # 2) 读取原始 xlsx 字节
-        try:
-            length = int(self.headers.get("Content-Length", 0))
-        except ValueError:
-            length = 0
-        raw = self.rfile.read(length) if length > 0 else b""
-        if not raw:
-            self._send(400, {"ok": False, "message": "未收到文件内容"})
+        # 3) 读取 xlsx 文件
+        file_item = form["file"]
+        if not file_item or not file_item.file:
+            self._send(400, {"ok": False, "message": "未收到文件"})
             return
+        raw = file_item.file.read()
+        if not raw:
+            self._send(400, {"ok": False, "message": "文件内容为空"})
+            return
+        fname = file_item.filename or ""
 
-        # 3) 暂存并解析（与内网站 reparse_and_save 逻辑一致）
+        # 4) 暂存并解析（与内网站 reparse_and_save 逻辑一致）
         fd, tmp = tempfile.mkstemp(suffix=".xlsx")
         with os.fdopen(fd, "wb") as f:
             f.write(raw)
@@ -128,14 +149,13 @@ class handler(BaseHTTPRequestHandler):
             except Exception:
                 pass
 
-        # 4) 版本/来源/时间（与内网站保持一致）
-        fname = self.headers.get("X-File-Name", "") or ""
+        # 5) 版本/来源/时间（与内网站保持一致）
         m = re.search(r"(\d{8})", fname)
         data["version"] = m.group(1) if m else datetime.now().strftime("%Y%m%d")
         data["source_file"] = fname
         data["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # 5) 提交 prices.json 到 GitHub 仓库
+        # 6) 提交 prices.json 到 GitHub 仓库
         repo = _env("GITHUB_REPO", "")
         gh_token = _env("GITHUB_TOKEN", "")
         branch = _env("GITHUB_BRANCH", "main")
