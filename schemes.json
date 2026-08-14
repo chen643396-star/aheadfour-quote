@@ -1,0 +1,25 @@
+{
+  "US": [
+    {
+      "code": "US-HK-HOU",
+      "name": "美国海卡·休斯顿专线",
+      "transport": "海卡",
+      "transport_class": "海运",
+      "scheme": "formula",
+      "rate_per_kg": 12.0,
+      "vol_divisor": 6000,
+      "clearance_fee": 0,
+      "pickup_lead": "—",
+      "sign_lead": "约28天",
+      "comp_penalty": "海卡专线以船司开船日起算，时效与赔偿以正式合同/提单条款为准",
+      "remark": "铝门窗等大件超大超重货物优先走海卡。报价 = 12元/KG × 计费重（实重与材积重取大）+ 派送费 + 超长附加；附加1待定。",
+      "surcharges": [
+        {"name": "派送费", "amount": 500.0, "basis": "shipment"},
+        {"name": "超长附加", "amount": 3000.0, "basis": "shipment"},
+        {"name": "附加1", "amount": null, "basis": "shipment"}
+      ],
+      "zones": [],
+      "tier_cols": []
+    }
+  ]
+}
