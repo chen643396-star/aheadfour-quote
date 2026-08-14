@@ -1,5 +1,5 @@
 /**
- * 前晋四公网站 · 上传价表 Serverless 函数（Vercel Node.js）
+ * 前晋四公网站 · 上传价表 Serverless 函数（Vercel Node.js · fetch 格式）
  *
  * 接收公网 admin 页 POST 的 xlsx 文件（FormData），
  * 用 SheetJS 解析为 prices 结构后，通过 GitHub Contents API 提交 prices.json 到仓库，
@@ -91,7 +91,7 @@ function parseCountry(ws) {
 
   const channels = [];
   let cur = null;
-  let tierCols = []; // [{col, minW}, ...]
+  let tierCols = [];
   let r = hdr;
 
   function readZoneFields(rr, inherit) {
@@ -111,14 +111,11 @@ function parseCountry(ws) {
     // 表头行：重新解析价格分层列
     if (name === HEADER_NAME) {
       tierCols = [];
-      for (let c = 3; c <= lastCol; c++) { // D列开始
+      for (let c = 3; c <= lastCol; c++) {
         const hv = cellVal(ws, r, c);
         if (hv != null) {
-          const m = VOL_RE.test(String(hv));
-          if (m) {
-            const match = String(hv).match(VOL_RE);
-            if (match) tierCols.push({ col: c, minW: parseInt(match[1], 10) });
-          }
+          const match = String(hv).match(VOL_RE);
+          if (match) tierCols.push({ col: c, minW: parseInt(match[1], 10) });
         }
       }
       r++;
@@ -394,90 +391,82 @@ async function ghUploadFile(repo, token, branch, pathRel, contentBytes, message)
   const { status: st, body: cur } = await ghApi("GET", `/repos/${repo}/contents/${pathRel}?ref=${branch}`, token);
   const sha = st === 200 ? cur.sha : undefined;
 
-  const data = {
+  const putData = {
     message: message || `sync: ${pathRel}`,
     content: Buffer.from(contentBytes).toString("base64"),
     branch,
   };
-  if (sha) data.sha = sha;
+  if (sha) putData.sha = sha;
 
-  return ghApi("PUT", `/repos/${repo}/contents/${pathRel}`, token, data);
+  return ghApi("PUT", `/repos/${repo}/contents/${pathRel}`, token, putData);
 }
 
-// ── Vercel 入口 ──────────────────────────────────────────────────
-export default async function handler(req, res) {
-  // CORS headers
-  const corsHeaders = {
+// ── CORS 工具 ────────────────────────────────────────────────────
+function corsHeaders() {
+  return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "*",
   };
+}
 
+// ── Vercel 入口（fetch Web Standard 格式）────────────────────────
+export default async function handler(request) {
   // OPTIONS 预检
-  if (req.method === "OPTIONS") {
-    res.status(204).set(corsHeaders).end();
-    return;
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: corsHeaders() });
   }
 
-  if (req.method !== "POST") {
-    res.status(405).json({ ok: false, message: "仅支持 POST" }).set(corsHeaders);
-    return;
+  if (request.method !== "POST") {
+    return Response.json(
+      { ok: false, message: "仅支持 POST" },
+      { status: 405, headers: corsHeaders() }
+    );
   }
 
   const adminPw = process.env.ADMIN_PW || "";
 
-  // 从 FormData 读取文件和密码
-  const chunks = [];
+  // 用 Vercel 原生 formData() 解析 multipart
   let pw = "";
-  let fileName = "";
   let fileBuffer = null;
+  let fileName = "";
 
-  for await (const chunk of req.body) chunks.push(chunk);
-  const fullBody = Buffer.concat(chunks);
-
-  const ct = req.headers["content-type"] || "";
-  if (ct.includes("multipart/form-data")) {
-    // 手动解析 multipart
-    const boundaryMatch = ct.match(/boundary=(?:"([^"]+)"|([^;\s]+))/i);
-    if (!boundaryMatch) {
-      res.status(400).json({ ok: false, message: "无法解析请求格式" }).set(corsHeaders);
-      return;
+  try {
+    const formData = await request.formData();
+    pw = formData.get("pw") || "";
+    const file = formData.get("file");
+    if (file && typeof file !== "string" && file.name) {
+      fileName = file.name;
+      fileBuffer = Buffer.from(await file.arrayBuffer());
     }
-    const boundary = boundaryMatch[1] || boundaryMatch[2];
-    const parts = fullBody.toString("latin1").split(`--${boundary}`);
-
-    for (const part of parts.slice(1, -1)) {
-      const headerEnd = part.indexOf("\r\n\r\n");
-      if (headerEnd < 0) continue;
-      const headerStr = part.slice(0, headerEnd);
-      const partData = Buffer.from(part.slice(headerEnd + 4), "latin1");
-
-      const cdMatch = headerStr.match(/content-disposition:\s*form-data;\s*name="([^"]*)"(?:;\s*filename="([^"]*)")?/i);
-      if (!cdMatch) continue;
-
-      const fieldName = cdMatch[1];
-      if (fieldName === "pw") pw = partData.toString("utf-8");
-      else if (fieldName === "file") {
-        fileBuffer = partData;
-        fileName = cdMatch[2] || "";
-      }
+  } catch (e) {
+    // 降级：尝试读取原始 body
+    const ct = request.headers.get("content-type") || "";
+    if (ct.includes("application/octet-stream") || ct.includes("application/vnd.openxmlformats-officedocument")) {
+      fileBuffer = Buffer.from(await request.arrayBuffer());
+      pw = request.headers.get("x-admin-pw") || "";
+      fileName = request.headers.get("x-file-name") || "";
+    } else {
+      return Response.json(
+        { ok: false, message: `无法解析请求：${e.message}` },
+        { status: 400, headers: corsHeaders() }
+      );
     }
-  } else {
-    // 原始字节流降级
-    fileBuffer = fullBody;
-    pw = req.headers["x-admin-pw"] || "";
-    fileName = req.headers["x-file-name"] || "";
   }
 
   // 密码校验
   if (adminPw && pw !== adminPw) {
-    res.status(403).json({ ok: false, message: "密码错误或无权限" }).set(corsHeaders);
-    return;
+    return Response.json(
+      { ok: false, message: "密码错误或无权限" },
+      { status: 403, headers: corsHeaders() }
+    );
   }
 
   if (!fileBuffer || fileBuffer.length === 0) {
-    res.status(400).json({ ok: false, message: "未收到文件内容" }).set(corsHeaders);
-    return;
+    return Response.json(
+      { ok: false, message: "未收到文件内容" },
+      { status: 400, headers: corsHeaders() }
+    );
   }
 
   // 解析 xlsx
@@ -486,8 +475,10 @@ export default async function handler(req, res) {
     data = parseWorkbook(fileBuffer);
   } catch (e) {
     console.error("Parse error:", e);
-    res.status(400).json({ ok: false, message: `解析失败：${e.message}` }).set(corsHeaders);
-    return;
+    return Response.json(
+      { ok: false, message: `解析失败：${e.message}` },
+      { status: 400, headers: corsHeaders() }
+    );
   }
 
   // 版本/来源
@@ -502,8 +493,10 @@ export default async function handler(req, res) {
   const branch = process.env.GITHUB_BRANCH || "main";
 
   if (!repo || !ghToken) {
-    res.status(500).json({ ok: false, message: "服务端配置缺失" }).set(corsHeaders);
-    return;
+    return Response.json(
+      { ok: false, message: "服务端配置缺失" },
+      { status: 500, headers: corsHeaders() }
+    );
   }
 
   const jsonContent = JSON.stringify(data, null, 2);
@@ -516,17 +509,17 @@ export default async function handler(req, res) {
   if (pushStatus === 200 || pushStatus === 201) {
     const chCount = Object.values(data.countries || {})
       .reduce((sum, c) => sum + (c.channels || []).length, 0);
-    res.status(200).set(corsHeaders).json({
+    return Response.json({
       ok: true,
       version: data.version,
       channel_count: chCount,
       fba_count: Object.keys(data.fba_map || {}).length,
       message: "价表已提交，公网约 1 分钟生效",
-    });
+    }, { headers: corsHeaders() });
   } else {
-    res.status(500).set(corsHeaders).json({
+    return Response.json({
       ok: false,
       message: `提交失败（HTTP ${pushStatus}）`,
-    });
+    }, { status: 500, headers: corsHeaders() });
   }
 }
