@@ -1,6 +1,6 @@
 /* 前晋四 · 价表管理（公网站 · 可上传）
-   解锁后可选 xlsx 上传，POST 到 Vercel 云端函数；函数解析后写回 GitHub 仓库，
-   Pages 约 1 分钟重建生效。回滚 / 历史仍走内网后台。 */
+   解锁后可选 xlsx 上传：浏览器本地用 SheetJS 解析，再经 GitHub Contents API 把 prices.json
+   推回仓库，Pages 约 1 分钟重建生效。回滚 / 历史仍走内网后台。 */
 
 const $ = (s) => document.querySelector(s);
 const NAV_PW = 'aheadfour888'; // 与内网管理密码一致
@@ -31,16 +31,34 @@ const toast = (m, e = false) => {
   setTimeout(() => (t.className = "toast"), 3200);
 };
 
-/* 加载本地价表到 Engine（页面加载即执行，供解锁后读取版本信息） */
+/* 加载本地价表到 Engine（页面加载即执行，供解锁后读取版本信息）
+   带 ?t= 时间戳破除 GitHub Pages CDN 缓存（max-age=600），保证每次刷新都拿到最新价表 */
 async function boot() {
   try {
+    const t = Date.now();
     const [p, s] = await Promise.all([
-      fetch('prices.json').then((r) => r.json()),
-      fetch('schemes.json').then((r) => r.json()),
+      fetch('prices.json?t=' + t).then((r) => r.json()),
+      fetch('schemes.json?t=' + t).then((r) => r.json()),
     ]);
     Engine.load(p, s);
   } catch (e) {
     toast('价表加载失败：' + e, true);
+  }
+}
+
+/* 强制重新拉取最新价表（绕过 CDN/浏览器缓存）并刷新统计面板 */
+async function reloadFresh() {
+  try {
+    const t = Date.now();
+    const [p, s] = await Promise.all([
+      fetch('prices.json?t=' + t).then((r) => r.json()),
+      fetch('schemes.json?t=' + t).then((r) => r.json()),
+    ]);
+    Engine.load(p, s);
+    loadVersionInfo();
+    return true;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -147,8 +165,20 @@ async function doUpload(file) {
     toast("解析完成，正在同步公网…");
     await pushToGitHub(data);
 
+    /* 立即用本次解析结果刷新面板（此时内存 Engine 仍是旧数据，不可调 loadVersionInfo） */
+    $("#curVer").textContent = "v" + data.version;
+    $("#curFile").textContent = "本次上传：" + (file.name || "价表文件");
+    $("#curTime").textContent = "已提交 GitHub，公网约 1 分钟生效";
+    $("#curStats").innerHTML =
+      `<span class="badge brand">渠道 ${chCount}</span>
+       <span class="badge accent">FBA ${fbaCount}</span>
+       <span class="badge muted">版本 ${data.version}</span>`;
     toast(`上传成功 · ${chCount} 渠道 / ${fbaCount} FBA，公网约 1 分钟生效`);
-    setTimeout(loadVersionInfo, 1500);
+
+    /* 约 75 秒后（Pages 重建完成）自动重新拉取最新价表，把面板同步成线上真实状态 */
+    setTimeout(() => {
+      reloadFresh().then((ok) => { if (ok) toast("已同步公网最新价表"); });
+    }, 75000);
   } catch (e) {
     toast("失败：" + (e && e.message ? e.message : e), true);
   } finally {
