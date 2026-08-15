@@ -13,9 +13,10 @@ const toast = (msg, err = false) => {
 async function init() {
   // 纯前端：先从本地 JSON 载入价表到 Engine（内网版由后端注入，这里需自行加载）
   try {
+    const t = Date.now();
     const [p, s] = await Promise.all([
-      fetch('prices.json').then((r) => r.json()),
-      fetch('schemes.json').then((r) => r.json()),
+      fetch('prices.json?t=' + t).then((r) => r.json()),
+      fetch('schemes.json?t=' + t).then((r) => r.json()),
     ]);
     Engine.load(p, s);
   } catch (e) {
