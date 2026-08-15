@@ -7,9 +7,10 @@ const toast = (m, e = false) => { const t = $("#toast"); t.textContent = m; t.cl
 
 async function init() {
   try {
+    const t = Date.now();
     const [p, s] = await Promise.all([
-      fetch('prices.json').then((r) => r.json()),
-      fetch('schemes.json').then((r) => r.json()),
+      fetch('prices.json?t=' + t).then((r) => r.json()),
+      fetch('schemes.json?t=' + t).then((r) => r.json()),
     ]);
     Engine.load(p, s);
   } catch (e) {
