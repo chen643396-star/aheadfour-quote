@@ -60,6 +60,17 @@
       </div>
 
       <div class="field">
+        <label>运输类型</label>
+        <div class="chips" id="transportChips">
+          <div class="chip active" data-mode="lcl">散货拼箱 (LCL)</div>
+          <div class="chip" data-mode="fcl">整柜 (FCL)</div>
+        </div>
+        <div class="hint">整柜按「单柜」计费（20GP/40GP/40HQ），与散货拼箱（按公斤）逻辑完全不同。</div>
+      </div>
+
+      <!-- ============ LCL 散货拼箱 ============ -->
+      <div id="lclFields">
+      <div class="field">
         <label for="channel">物流渠道</label>
         <select id="channel"><option value="">不选则自动匹配（推荐）</option></select>
         <div class="hint" id="channelHint">选择目的国后可手动指定渠道；留空则系统根据货物重量/尺寸自动匹配最优渠道（重货优先海卡航、轻货优先快递空运）</div>
@@ -90,6 +101,67 @@
         <div class="hint">用于计算材积重（快递 ÷5000 / 专线 ÷6000）及超长超重判定。</div>
       </div>
 
+      <button class="btn btn-primary btn-block" id="quoteBtn">
+        <span>⚡ 立即报价 (LCL)</span>
+      </button>
+      </div>
+
+      <!-- ============ FCL 整柜 ============ -->
+      <div id="fclFields" style="display:none">
+      <div class="field">
+        <label for="fclContainer">柜型</label>
+        <select id="fclContainer"><option value="">请选择国家后加载</option></select>
+      </div>
+      <div class="field">
+        <label for="fclMode">服务模式</label>
+        <select id="fclMode">
+          <option value="ddp">DDP 到仓（包税/清关/派送）</option>
+          <option value="cy">到港 (CY-CY)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fclOrigin">起运港</label>
+        <select id="fclOrigin"><option value="">请选择国家后加载</option></select>
+      </div>
+      <div class="field">
+        <label for="fclDest">目的港</label>
+        <select id="fclDest"><option value="">请选择国家后加载</option></select>
+      </div>
+      <div class="field">
+        <label>货物参数</label>
+        <div class="dims">
+          <div><label>货重 (吨)</label><input type="number" id="fclWeight" min="0" step="0.5" placeholder="如 18"></div>
+          <div><label>海运费(可选)</label><input type="number" id="fclOcean" min="0" step="100" placeholder="留空按价表查"></div>
+        </div>
+        <div class="hint">海运费留空时系统自动按「国家×目的港×柜型」查价表；若价表未公示该航线运价，将提示手动输入或单询。</div>
+      </div>
+      <div class="field">
+        <label>可选附加费用（留空则按价表单询）</label>
+        <div class="dims">
+          <div><label>国内拖车费</label><input type="number" id="fclTruck" min="0" step="50" placeholder="单询"></div>
+          <div><label>关税/增值税</label><input type="number" id="fclTax" min="0" step="100" placeholder="单询/DDP"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label>整柜专属触发附加费（勾选后自动计收 / 单询）</label>
+        <div class="attr-panel">
+          <div class="attr-chips">
+            <label class="attr-chk"><input type="checkbox" id="fclOdd"><span>异地提柜</span></label>
+            <label class="attr-chk"><input type="checkbox" id="fclPss"><span>旺季 PSS/GRI</span></label>
+            <label class="attr-chk"><input type="checkbox" id="fclAppt"><span>亚马逊约仓</span></label>
+            <label class="attr-chk"><input type="checkbox" id="fclOvertime"><span>滞港/滞箱</span></label>
+            <label class="attr-chk"><input type="checkbox" id="fclOverDim"><span>超长超宽超高</span></label>
+            <label class="attr-chk"><input type="checkbox" id="fclPva"><span>PVA 递延清关</span></label>
+          </div>
+          <div class="hint">勾选后按《整柜费用触发规则手册》自动计收对应附加费；未公示标准价的项目以「单询」提示、不计入总价。</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" id="quoteBtnFcl">
+        <span>⚡ 整柜报价 (FCL)</span>
+      </button>
+      </div>
+
+      <!-- ============ 货物属性·触发式计费（LCL/FCL 共用） ============ -->
       <div class="field">
         <label>货物属性 · 触发式计费（自动识别，可手动修正）</label>
         <div class="attr-panel">
@@ -119,10 +191,6 @@
           <div class="hint">勾选后系统按《费用触发规则手册》自动计收对应附加费；未填项以「单询」提示、不计入总价。强制认证(FDA/CE 等)由识别自动带入，可在上方识别结果中查看。</div>
         </div>
       </div>
-
-      <button class="btn btn-primary btn-block" id="quoteBtn">
-        <span>⚡ 立即报价</span>
-      </button>
     </div>
 
     <!-- 右：结果 -->
