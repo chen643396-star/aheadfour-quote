@@ -8517,12 +8517,12 @@
       ],
       "service_modes": [
         {
-          "code": "cy",
-          "name": "到港(CY-CY)"
+          "code": "door",
+          "name": "整柜到门 (DDP·直送收件人地址)"
         },
         {
-          "code": "ddp",
-          "name": "DDP到仓"
+          "code": "warehouse",
+          "name": "整柜到仓 (DDP·送 FBA/海外仓)"
         }
       ],
       "origin_ports": [
@@ -8545,10 +8545,6 @@
       "sea": {
         "baf": null,
         "thc": null
-      },
-      "dest_cy": {
-        "port_fee": null,
-        "terminal_fee": null
       },
       "dest_ddp": {
         "import_clearance": null,
@@ -8587,12 +8583,12 @@
       ],
       "service_modes": [
         {
-          "code": "cy",
-          "name": "到港(CY-CY)"
+          "code": "door",
+          "name": "整柜到门 (DDP·直送收件人地址)"
         },
         {
-          "code": "ddp",
-          "name": "DDP到仓"
+          "code": "warehouse",
+          "name": "整柜到仓 (DDP·送 FBA/海外仓)"
         }
       ],
       "origin_ports": [
@@ -8612,10 +8608,6 @@
       "sea": {
         "baf": null,
         "thc": null
-      },
-      "dest_cy": {
-        "port_fee": null,
-        "terminal_fee": null
       },
       "dest_ddp": {
         "import_clearance": null,
@@ -8654,12 +8646,12 @@
       ],
       "service_modes": [
         {
-          "code": "cy",
-          "name": "到港(CY-CY)"
+          "code": "door",
+          "name": "整柜到门 (DDP·直送收件人地址)"
         },
         {
-          "code": "ddp",
-          "name": "DDP到仓"
+          "code": "warehouse",
+          "name": "整柜到仓 (DDP·送 FBA/海外仓)"
         }
       ],
       "origin_ports": [
@@ -8680,10 +8672,6 @@
       "sea": {
         "baf": null,
         "thc": null
-      },
-      "dest_cy": {
-        "port_fee": null,
-        "terminal_fee": null
       },
       "dest_ddp": {
         "import_clearance": null,
@@ -8722,12 +8710,12 @@
       ],
       "service_modes": [
         {
-          "code": "cy",
-          "name": "到港(CY-CY)"
+          "code": "door",
+          "name": "整柜到门 (DDP·直送收件人地址)"
         },
         {
-          "code": "ddp",
-          "name": "DDP到仓"
+          "code": "warehouse",
+          "name": "整柜到仓 (DDP·送 FBA/海外仓)"
         }
       ],
       "origin_ports": [
@@ -8747,10 +8735,6 @@
       "sea": {
         "baf": null,
         "thc": null
-      },
-      "dest_cy": {
-        "port_fee": null,
-        "terminal_fee": null
       },
       "dest_ddp": {
         "import_clearance": null,
