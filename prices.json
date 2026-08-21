@@ -8507,5 +8507,279 @@
       "port": null,
       "cut_off": null
     }
-  ]
+  ],
+  "fcl": {
+    "US": {
+      "container_types": [
+        "20GP",
+        "40GP",
+        "40HQ"
+      ],
+      "service_modes": [
+        {
+          "code": "cy",
+          "name": "到港(CY-CY)"
+        },
+        {
+          "code": "ddp",
+          "name": "DDP到仓"
+        }
+      ],
+      "origin_ports": [
+        "盐田",
+        "蛇口"
+      ],
+      "dest_ports": [
+        "洛杉矶/长滩",
+        "纽约",
+        "休斯顿",
+        "萨凡纳",
+        "芝加哥"
+      ],
+      "ocean_rates": {},
+      "domestic": {
+        "customs_fee": 350,
+        "docs_fee": null,
+        "truck_fee": null
+      },
+      "sea": {
+        "baf": null,
+        "thc": null
+      },
+      "dest_cy": {
+        "port_fee": null,
+        "terminal_fee": null
+      },
+      "dest_ddp": {
+        "import_clearance": null,
+        "pva_clearance": {
+          "US": 0,
+          "CA": 0,
+          "UK": 350,
+          "EU": 400
+        },
+        "truck_fee": null
+      },
+      "trig": {
+        "overweight_limit_kg": {
+          "20GP": 18000,
+          "40GP": 24000,
+          "40HQ": 22000
+        },
+        "overweight_fee": null,
+        "odd_port_fee": null,
+        "pss_fee": null,
+        "appointment_fee": null,
+        "remote_truck_fee": null,
+        "category_fee": {
+          "US": 2,
+          "CA": 2,
+          "UK": 3,
+          "EU": 3
+        }
+      }
+    },
+    "UK": {
+      "container_types": [
+        "20GP",
+        "40GP",
+        "40HQ"
+      ],
+      "service_modes": [
+        {
+          "code": "cy",
+          "name": "到港(CY-CY)"
+        },
+        {
+          "code": "ddp",
+          "name": "DDP到仓"
+        }
+      ],
+      "origin_ports": [
+        "盐田",
+        "蛇口"
+      ],
+      "dest_ports": [
+        "费利克斯托",
+        "南安普顿"
+      ],
+      "ocean_rates": {},
+      "domestic": {
+        "customs_fee": 350,
+        "docs_fee": null,
+        "truck_fee": null
+      },
+      "sea": {
+        "baf": null,
+        "thc": null
+      },
+      "dest_cy": {
+        "port_fee": null,
+        "terminal_fee": null
+      },
+      "dest_ddp": {
+        "import_clearance": null,
+        "pva_clearance": {
+          "US": 0,
+          "CA": 0,
+          "UK": 350,
+          "EU": 400
+        },
+        "truck_fee": null
+      },
+      "trig": {
+        "overweight_limit_kg": {
+          "20GP": 18000,
+          "40GP": 24000,
+          "40HQ": 22000
+        },
+        "overweight_fee": null,
+        "odd_port_fee": null,
+        "pss_fee": null,
+        "appointment_fee": null,
+        "remote_truck_fee": null,
+        "category_fee": {
+          "US": 2,
+          "CA": 2,
+          "UK": 3,
+          "EU": 3
+        }
+      }
+    },
+    "EU": {
+      "container_types": [
+        "20GP",
+        "40GP",
+        "40HQ"
+      ],
+      "service_modes": [
+        {
+          "code": "cy",
+          "name": "到港(CY-CY)"
+        },
+        {
+          "code": "ddp",
+          "name": "DDP到仓"
+        }
+      ],
+      "origin_ports": [
+        "盐田",
+        "蛇口"
+      ],
+      "dest_ports": [
+        "汉堡",
+        "鹿特丹",
+        "安特卫普"
+      ],
+      "ocean_rates": {},
+      "domestic": {
+        "customs_fee": 350,
+        "docs_fee": null,
+        "truck_fee": null
+      },
+      "sea": {
+        "baf": null,
+        "thc": null
+      },
+      "dest_cy": {
+        "port_fee": null,
+        "terminal_fee": null
+      },
+      "dest_ddp": {
+        "import_clearance": null,
+        "pva_clearance": {
+          "US": 0,
+          "CA": 0,
+          "UK": 350,
+          "EU": 400
+        },
+        "truck_fee": null
+      },
+      "trig": {
+        "overweight_limit_kg": {
+          "20GP": 18000,
+          "40GP": 24000,
+          "40HQ": 22000
+        },
+        "overweight_fee": null,
+        "odd_port_fee": null,
+        "pss_fee": null,
+        "appointment_fee": null,
+        "remote_truck_fee": null,
+        "category_fee": {
+          "US": 2,
+          "CA": 2,
+          "UK": 3,
+          "EU": 3
+        }
+      }
+    },
+    "CA": {
+      "container_types": [
+        "20GP",
+        "40GP",
+        "40HQ"
+      ],
+      "service_modes": [
+        {
+          "code": "cy",
+          "name": "到港(CY-CY)"
+        },
+        {
+          "code": "ddp",
+          "name": "DDP到仓"
+        }
+      ],
+      "origin_ports": [
+        "盐田",
+        "蛇口"
+      ],
+      "dest_ports": [
+        "温哥华",
+        "多伦多"
+      ],
+      "ocean_rates": {},
+      "domestic": {
+        "customs_fee": 350,
+        "docs_fee": null,
+        "truck_fee": null
+      },
+      "sea": {
+        "baf": null,
+        "thc": null
+      },
+      "dest_cy": {
+        "port_fee": null,
+        "terminal_fee": null
+      },
+      "dest_ddp": {
+        "import_clearance": null,
+        "pva_clearance": {
+          "US": 0,
+          "CA": 0,
+          "UK": 350,
+          "EU": 400
+        },
+        "truck_fee": null
+      },
+      "trig": {
+        "overweight_limit_kg": {
+          "20GP": 18000,
+          "40GP": 24000,
+          "40HQ": 22000
+        },
+        "overweight_fee": null,
+        "odd_port_fee": null,
+        "pss_fee": null,
+        "appointment_fee": null,
+        "remote_truck_fee": null,
+        "category_fee": {
+          "US": 2,
+          "CA": 2,
+          "UK": 3,
+          "EU": 3
+        }
+      }
+    }
+  }
 }
