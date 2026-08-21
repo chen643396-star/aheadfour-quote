@@ -453,7 +453,7 @@
       const a = attrs || {};
       const lines = [], pending = [], flags = [];
       const containerType = ct || '40HQ';
-      const serviceMode = mode || 'ddp';
+      const serviceMode = mode || 'door';
 
       // 国内起运段
       const dom = fcl.domestic || {};
@@ -480,34 +480,41 @@
       if (thc != null && thc !== '') lines.push({ name: '码头操作费(THC)', detail: '海运段', amount: round2(Number(thc)) });
       else pending.push('码头操作费(THC)需按船公司单询');
 
-      // 目的港段
-      if (serviceMode === 'cy') {
-        const dcy = fcl.dest_cy || {};
-        const pf = (payload.port_fee != null) ? payload.port_fee : dcy.port_fee;
-        if (pf != null && pf !== '') lines.push({ name: '目的港港杂费', detail: '到港(CY)模式', amount: round2(Number(pf)) });
-        else pending.push('目的港港杂费需单询');
-        const tf = (payload.terminal_fee != null) ? payload.terminal_fee : dcy.terminal_fee;
-        if (tf != null && tf !== '') lines.push({ name: '目的港码头操作费', detail: '到港(CY)模式', amount: round2(Number(tf)) });
-        else pending.push('目的港码头操作费需单询');
-      } else {
+      // 目的港段（整柜到门/到仓均为 DDP 全包，不再做到港CY）
+      const trig = fcl.trig || {};
+      {
         const ddp = fcl.dest_ddp || {};
         const ic = (payload.import_clearance != null) ? payload.import_clearance : ddp.import_clearance;
-        if (ic != null && ic !== '') lines.push({ name: '进口清关费', detail: 'DDP到仓·进口清关', amount: round2(Number(ic)) });
+        if (ic != null && ic !== '') lines.push({ name: '进口清关费', detail: 'DDP·进口清关', amount: round2(Number(ic)) });
         else pending.push('进口清关费需按目的国单询');
         if (pva) {
           const pvc = ddp.pva_clearance || {};
           const pvf = (pvc && pvc[country] != null) ? pvc[country] : (typeof pvc === 'number' ? pvc : 0);
           if (pvf) lines.push({ name: 'PVA递延清关费', detail: 'DDP包税·PVA递延', amount: round2(Number(pvf)) });
         }
-        const dt = (payload.dest_truck_fee != null) ? payload.dest_truck_fee : ddp.truck_fee;
-        if (dt != null && dt !== '') lines.push({ name: '目的港拖车费', detail: '码头→仓库(DDP)', amount: round2(Number(dt)) });
-        else pending.push('目的港拖车费（码头→仓库）需单询');
-        if (tax_fee != null && tax_fee !== '') lines.push({ name: '关税/增值税', detail: 'DDP到仓·实报实销/包税一口价', amount: round2(Number(tax_fee)) });
+        if (serviceMode === 'warehouse') {
+          // 整柜到仓：约仓费 + 海外仓操作费（卸货入库/贴标/拦截）
+          if (appointment) {
+            const apf = trig.appointment_fee;
+            if (apf != null && apf !== '') lines.push({ name: '亚马逊送仓预约费', detail: '整柜直送FBA需预约', amount: round2(Number(apf)) });
+            else pending.push('亚马逊送仓预约费(约仓费)爆仓期需单询');
+          } else {
+            pending.push('整柜到仓建议预约送仓，约仓费(appointment)未勾选');
+          }
+          const ow = ddp.overseas_wh_fee;
+          if (ow != null && ow !== '') lines.push({ name: '海外仓操作费', detail: '卸货入库/贴标/拦截', amount: round2(Number(ow)) });
+          else pending.push('海外仓操作费（卸货入库/贴标/拦截）需按仓库单询');
+        } else {
+          // 整柜到门：地址类附加费（商业/私人/偏远），尾程直送收件人地址
+          const dt = (payload.dest_truck_fee != null) ? payload.dest_truck_fee : ddp.truck_fee;
+          if (dt != null && dt !== '') lines.push({ name: '目的港拖车派送费', detail: '码头→收件人地址(到门)', amount: round2(Number(dt)) });
+          else pending.push('目的港拖车派送费（码头→收件人地址）需单询');
+        }
+        if (tax_fee != null && tax_fee !== '') lines.push({ name: '关税/增值税', detail: 'DDP·实报实销/包税一口价', amount: round2(Number(tax_fee)) });
         else pending.push('关税/增值税需按HS编码/货值单询（或包税一口价）');
       }
 
       // 整柜专属触发附加费
-      const trig = fcl.trig || {};
       const wkg = (cargo_weight_ton || 0) * 1000;
       const lim = (trig.overweight_limit_kg || {})[containerType];
       if (lim && wkg > lim) {
@@ -526,11 +533,6 @@
         const psf = trig.pss_fee;
         if (psf != null && psf !== '') lines.push({ name: '旺季附加费(PSS/GRI)', detail: '航运旺季全航线普涨', amount: round2(Number(psf)) });
         else pending.push('旺季附加费(PSS/GRI)按船公司通知单询');
-      }
-      if (appointment) {
-        const apf = trig.appointment_fee;
-        if (apf != null && apf !== '') lines.push({ name: '亚马逊送仓预约费', detail: '整柜直送FBA需预约', amount: round2(Number(apf)) });
-        else pending.push('亚马逊送仓预约费(约仓费)爆仓期需单询');
       }
       if (overtime) pending.push('滞港费(Demurrage)/滞箱费(Detention)按超期天数单询');
 
@@ -557,7 +559,7 @@
       const catDefault = { US: 2, CA: 2, UK: 3, EU: 3 };
       for (const [key, label] of [['high_value', '高货值'], ['high_tax', '高税率'], ['high_check', '高查验率']]) {
         if (a[key]) {
-          if (pva || serviceMode === 'ddp') {
+          if (pva) {
             const rateMap = (trig.category_fee && trig.category_fee[country]) || catDefault[country] || 2;
             if (rateMap) lines.push({ name: `${label}附加费`, detail: `包税渠道+${label}品类 ${rateMap}元/kg×${(cargoW / 1000).toFixed(2)}吨`, amount: round2(rateMap * cargoW) });
           } else {
@@ -576,7 +578,7 @@
         pending.push('可自愿认购货运保险（货值3‰）');
       }
       const at = a.address_type;
-      if (serviceMode === 'ddp' && (at === 'remote' || at === 'ultra_remote')) {
+      if (serviceMode === 'door' && (at === 'remote' || at === 'ultra_remote')) {
         const rtf = trig.remote_truck_fee;
         if (rtf != null && rtf !== '') lines.push({ name: '偏远地址拖车附加费', detail: `${at === 'ultra_remote' ? '超偏远' : '偏远'}地址`, amount: round2(Number(rtf)) });
         else pending.push('偏远/超偏远地址拖车附加费需单询');
