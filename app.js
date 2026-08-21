@@ -205,7 +205,7 @@ async function quoteFcl() {
   const payload = {
     country: COUNTRY,
     container_type: $("#fclContainer").value || null,
-    service_mode: $("#fclMode").value || "ddp",
+    service_mode: $("#fclMode").value || "door",
     origin_port: $("#fclOrigin").value || null,
     dest_port: $("#fclDest").value || null,
     ocean_rate: $("#fclOcean").value || null,
@@ -287,7 +287,7 @@ function renderQuote(q) {
 function renderFclQuote(q) {
   $("#quoteEmpty").style.display = "none";
   const body = $("#quoteBody"); body.style.display = "block";
-  const modeName = { cy: "到港 (CY-CY)", ddp: "DDP 到仓" }[q.service_mode] || q.service_mode;
+  const modeName = { door: "整柜到门 (DDP)", warehouse: "整柜到仓 (DDP)", cy: "到港 (CY-CY)", ddp: "DDP 到仓" }[q.service_mode] || q.service_mode;
 
   if (!q.ok && q.single_quote) {
     body.innerHTML = `
@@ -333,7 +333,7 @@ function renderFclQuote(q) {
 
 function copyFclQuote() {
   const q = window._lastQuote; if (!q || !q.ok || q.mode !== "fcl") return;
-  const modeName = { cy: "到港(CY-CY)", ddp: "DDP到仓" }[q.service_mode] || q.service_mode;
+  const modeName = { door: "整柜到门(DDP)", warehouse: "整柜到仓(DDP)", cy: "到港(CY-CY)", ddp: "DDP到仓" }[q.service_mode] || q.service_mode;
   const lines = [
     `【前晋四 AHEADFOUR 整柜(FCL)报价】`,
     `柜型：${q.container_type}　服务模式：${modeName}`,
@@ -502,7 +502,7 @@ async function applyIntake(r) {
       const sel = $("#fclContainer");
       if ([...sel.options].some((o) => o.value === r.container_type)) sel.value = r.container_type;
     }
-    if (r.terms && r.terms.some((t) => t.toUpperCase().includes("CY"))) $("#fclMode").value = "cy";
+    // 整柜到港(CY-CY)已不做，识别到 CY/港到港关键词时默认落到「整柜到门(DDP)」
   }
   showIntakeResult(r);
   toast(r.is_fcl ? "已识别为整柜业务，已切换到整柜(FCL)表单，请补全柜型/目的港后报价" : "已自动识别并填充，请核对后报价");
@@ -532,7 +532,7 @@ $("#quoteClear").onclick = () => {
   // 清空整柜(FCL)字段
   ["fclWeight", "fclOcean", "fclTruck", "fclTax"].forEach((id) => { const el = $("#" + id); if (el) el.value = ""; });
   ["fclOdd", "fclPss", "fclAppt", "fclOvertime", "fclOverDim", "fclPva"].forEach((id) => { const el = $("#" + id); if (el) el.checked = false; });
-  const modeEl = $("#fclMode"); if (modeEl) modeEl.value = "ddp";
+  const modeEl = $("#fclMode"); if (modeEl) modeEl.value = "door";
   // 切换回散货(LCL)视图，重置国家选中
   QUOTE_MODE = "lcl";
   document.querySelectorAll("#transportChips .chip").forEach((x) => x.classList.toggle("active", x.dataset.mode === "lcl"));
