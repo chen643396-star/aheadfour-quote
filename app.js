@@ -1,6 +1,7 @@
 /* 前晋四 · 内部报价工作台 前端逻辑（纯前端版：直接调用本地 Engine，不依赖后端 API） */
 const FLAG = { US: "🇺🇸", UK: "🇬🇧", EU: "🇪🇺", CA: "🇨🇦" };
 let COUNTRY = null;
+let QUOTE_MODE = "lcl";  // lcl | fcl
 
 const $ = (s) => document.querySelector(s);
 let _lastClassifyDest = null;  // 记录上次分类用的邮编，用于判断邮编是否变化
@@ -55,6 +56,7 @@ function selectCountry(code, el) {
   document.querySelectorAll("#countryChips .chip").forEach((x) => x.classList.remove("active"));
   el.classList.add("active");
   loadChannels(code);
+  if (QUOTE_MODE === "fcl") loadFclMeta(code);
 }
 
 async function loadChannels(country, classify = true) {
@@ -103,6 +105,47 @@ async function loadChannels(country, classify = true) {
   }
 }
 
+/* ---------- 整柜(FCL)配置加载（纯前端：读本地价表 fcl 段） ---------- */
+function loadFclMeta(country) {
+  const r = Engine.getFclMeta(country);
+  if (!r.ok) {
+    $("#fclContainer").innerHTML = `<option value="">未配置整柜费率</option>`;
+    $("#fclOrigin").innerHTML = `<option value="">—</option>`;
+    $("#fclDest").innerHTML = `<option value="">—</option>`;
+    return;
+  }
+  const f = r.fcl;
+  const fill = (selId, arr, ph) => {
+    const sel = $(selId);
+    sel.innerHTML = (arr && arr.length)
+      ? arr.map((v) => `<option value="${v}">${v}</option>`).join("")
+      : `<option value="">${ph}</option>`;
+  };
+  fill("#fclContainer", f.container_types, "无柜型");
+  fill("#fclOrigin", f.origin_ports, "无起运港");
+  fill("#fclDest", f.dest_ports, "无目的港");
+}
+
+/* 运输类型切换（LCL / FCL） */
+function setupTransportToggle() {
+  document.querySelectorAll("#transportChips .chip").forEach((chip) => {
+    chip.onclick = () => {
+      const mode = chip.dataset.mode;
+      if (mode === QUOTE_MODE) return;
+      QUOTE_MODE = mode;
+      document.querySelectorAll("#transportChips .chip").forEach((x) => x.classList.remove("active"));
+      chip.classList.add("active");
+      const fcl = mode === "fcl";
+      $("#lclFields").style.display = fcl ? "none" : "";
+      $("#fclFields").style.display = fcl ? "" : "none";
+      const qb = $("#quoteBody"), qe = $("#quoteEmpty");
+      if (qb) { qb.innerHTML = ""; qb.style.display = "none"; }
+      if (qe) qe.style.display = "";
+      if (fcl && COUNTRY) loadFclMeta(COUNTRY);
+    };
+  });
+}
+
 /* ---------- 工具 ---------- */
 function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
 
@@ -127,6 +170,7 @@ function collectAttrs() {
 }
 
 async function quote() {
+  if (QUOTE_MODE === "fcl") return quoteFcl();
   const btn = $("#quoteBtn");
   const sel = $("#channel");
   const scheme = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].dataset.scheme : "tier";
@@ -156,7 +200,38 @@ async function quote() {
   finally { btn.disabled = false; btn.innerHTML = `<span>⚡ 立即报价</span>`; }
 }
 
+async function quoteFcl() {
+  const btn = $("#quoteBtnFcl");
+  const payload = {
+    country: COUNTRY,
+    container_type: $("#fclContainer").value || null,
+    service_mode: $("#fclMode").value || "ddp",
+    origin_port: $("#fclOrigin").value || null,
+    dest_port: $("#fclDest").value || null,
+    ocean_rate: $("#fclOcean").value || null,
+    cargo_weight_ton: parseFloat($("#fclWeight").value) || 0,
+    pva: $("#fclPva").checked,
+    domestic_truck_fee: $("#fclTruck").value || null,
+    tax_fee: $("#fclTax").value || null,
+    odd_port: $("#fclOdd").checked,
+    pss: $("#fclPss").checked,
+    appointment: $("#fclAppt").checked,
+    overtime: $("#fclOvertime").checked,
+    over_dim: $("#fclOverDim").checked,
+  };
+  payload.attrs = collectAttrs();
+  if (!payload.country) { toast("请先选择整柜目的国家", true); return; }
+  if (!payload.container_type || !payload.dest_port) { toast("请选择柜型与目的港", true); return; }
+  btn.disabled = true; btn.innerHTML = `<span class="spinner"></span> 计算中…`;
+  try {
+    const q = Engine.computeFclQuote(payload);
+    renderQuote(q);
+  } catch (e) { toast("整柜报价计算失败：" + e, true); }
+  finally { btn.disabled = false; btn.innerHTML = `<span>⚡ 整柜报价 (FCL)</span>`; }
+}
+
 function renderQuote(q) {
+  if (q.mode === "fcl") { renderFclQuote(q); return; }
   $("#quoteEmpty").style.display = "none";
   const body = $("#quoteBody"); body.style.display = "block";
   if (!q.ok && q.single_quote) {
@@ -207,6 +282,69 @@ function renderQuote(q) {
     ${lead}${remark}${penalty}${flags}
     <button class="btn btn-ghost btn-block mt" onclick="copyQuote()">📋 复制报价摘要</button>`;
   window._lastQuote = q;
+}
+
+function renderFclQuote(q) {
+  $("#quoteEmpty").style.display = "none";
+  const body = $("#quoteBody"); body.style.display = "block";
+  const modeName = { cy: "到港 (CY-CY)", ddp: "DDP 到仓" }[q.service_mode] || q.service_mode;
+
+  if (!q.ok && q.single_quote) {
+    body.innerHTML = `
+      <div class="quote-head"><div class="quote-route">整柜 (FCL) ${q.container_type || ""}
+        <small>${(q.country_name || "") || ""} · ${(q.dest_port || "")}</small></div>
+        <span class="badge accent">单询</span></div>
+      <div class="callout warn"><span class="ic">💬</span><div>${q.message}</div></div>`;
+    return;
+  }
+  if (!q.ok) {
+    body.innerHTML = `<div class="callout warn"><span class="ic">⚠️</span><div>${q.message || "无法报价"}</div></div>`;
+    return;
+  }
+
+  const items = (q.line_items || []).map((li) =>
+    `<li><span class="nm">${li.name}<small>${li.detail || ""}</small></span><span class="val">¥${li.amount.toFixed(2)}</span></li>`).join("");
+  const flags = (q.flags || []).length
+    ? `<ul class="flag-list">${q.flags.map((f) => `<li>⚠️ ${f}</li>`).join("")}</ul>` : "";
+
+  const head = `${q.container_type} · ${modeName} · ${q.dest_port}` +
+    (q.origin_port ? `（${q.origin_port} 起运）` : "");
+  const sub = `${(q.country_name || "") || ""}` +
+    (q.cargo_weight_ton ? ` · 货重 ${q.cargo_weight_ton} 吨` : "") +
+    (q.pva ? " · PVA 递延清关" : "");
+
+  body.innerHTML = `
+    <div class="quote-head">
+      <div class="quote-route">${head}<small>${sub}</small></div>
+      <span class="badge brand">整柜 FCL</span>
+    </div>
+    <div class="total-box">
+      <div><div class="lab">预估总价 (RMB)</div></div>
+      <div class="amt"><small>¥</small>${q.total.toFixed(2)}</div>
+    </div>
+    <ul class="breakdown">
+      ${items}
+      <li><span class="nm" style="font-weight:800;color:var(--ink)">合计</span><span class="val" style="font-size:16px;color:var(--brand-600)">¥${q.total.toFixed(2)}</span></li>
+    </ul>
+    ${flags}
+    <button class="btn btn-ghost btn-block mt" onclick="copyFclQuote()">📋 复制整柜报价摘要</button>`;
+  window._lastQuote = q;
+}
+
+function copyFclQuote() {
+  const q = window._lastQuote; if (!q || !q.ok || q.mode !== "fcl") return;
+  const modeName = { cy: "到港(CY-CY)", ddp: "DDP到仓" }[q.service_mode] || q.service_mode;
+  const lines = [
+    `【前晋四 AHEADFOUR 整柜(FCL)报价】`,
+    `柜型：${q.container_type}　服务模式：${modeName}`,
+    `航线：${(q.origin_port || "?")} → ${q.dest_port}（${q.country_name}）`,
+    q.cargo_weight_ton ? `货重：${q.cargo_weight_ton} 吨` : "",
+    q.pva ? `PVA 递延清关：是` : "",
+    ...q.line_items.map((li) => `  - ${li.name}：¥${li.amount.toFixed(2)}`),
+    `合计：¥${q.total.toFixed(2)}`,
+    ...(q.flags && q.flags.length ? ["（单询项：" + q.flags.join("；") + "）"] : []),
+  ].filter(Boolean).join("\n");
+  navigator.clipboard.writeText(lines).then(() => toast("整柜报价摘要已复制"), () => toast("复制失败", true));
 }
 
 function copyQuote() {
@@ -353,8 +491,21 @@ async function applyIntake(r) {
       $("#channelHint").textContent = "已按识别结果预选：" + (r.suggested_channel_name || "");
     }
   }
+  // 整柜(FCL)自动切换
+  if (r.is_fcl) {
+    QUOTE_MODE = "fcl";
+    document.querySelectorAll("#transportChips .chip").forEach((x) => x.classList.toggle("active", x.dataset.mode === "fcl"));
+    $("#lclFields").style.display = "none";
+    $("#fclFields").style.display = "";
+    await loadFclMeta(r.country);
+    if (r.container_type) {
+      const sel = $("#fclContainer");
+      if ([...sel.options].some((o) => o.value === r.container_type)) sel.value = r.container_type;
+    }
+    if (r.terms && r.terms.some((t) => t.toUpperCase().includes("CY"))) $("#fclMode").value = "cy";
+  }
   showIntakeResult(r);
-  toast("已自动识别并填充，请核对后报价");
+  toast(r.is_fcl ? "已识别为整柜业务，已切换到整柜(FCL)表单，请补全柜型/目的港后报价" : "已自动识别并填充，请核对后报价");
 }
 
 $("#intakeBtn").onclick = async () => {
@@ -378,6 +529,15 @@ $("#quoteClear").onclick = () => {
   ["weight", "len", "wid", "hei", "dest", "cw"].forEach((id) => { const el = $("#" + id); if (el) el.value = ""; });
   const piecesEl = $("#pieces");
   if (piecesEl) piecesEl.value = "1";
+  // 清空整柜(FCL)字段
+  ["fclWeight", "fclOcean", "fclTruck", "fclTax"].forEach((id) => { const el = $("#" + id); if (el) el.value = ""; });
+  ["fclOdd", "fclPss", "fclAppt", "fclOvertime", "fclOverDim", "fclPva"].forEach((id) => { const el = $("#" + id); if (el) el.checked = false; });
+  const modeEl = $("#fclMode"); if (modeEl) modeEl.value = "ddp";
+  // 切换回散货(LCL)视图，重置国家选中
+  QUOTE_MODE = "lcl";
+  document.querySelectorAll("#transportChips .chip").forEach((x) => x.classList.toggle("active", x.dataset.mode === "lcl"));
+  $("#lclFields").style.display = "";
+  $("#fclFields").style.display = "none";
   // 重置渠道
   const sel = $("#channel");
   if (sel) sel.selectedIndex = 0;
@@ -408,6 +568,8 @@ $("#channel").addEventListener("change", () => {
 });
 ["weight", "pieces", "len", "wid", "hei", "dest"].forEach((id) =>
   $("#" + id).addEventListener("keydown", (e) => { if (e.key === "Enter") quote(); }));
+$("#quoteBtnFcl").onclick = quoteFcl;
+setupTransportToggle();
 
 /* ---------- 页面加载 ---------- */
 window.addEventListener('DOMContentLoaded', init);
