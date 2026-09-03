@@ -1,6 +1,6 @@
 {
   "version": "20260902",
-  "updated_at": "2026-09-02 03:38:05",
+  "updated_at": "2026-09-03 17:41:47",
   "source_file": "前晋四物流专线价表20260902.xlsx",
   "company": {
     "warehouses": [
@@ -29,22 +29,24 @@
           "transport": "UPS",
           "transport_class": "快递",
           "vol_divisor": 5000,
-          "clearance_fee": 200,
+          "clearance_fee": 200.0,
           "pickup_lead": "3天",
           "sign_lead": "5天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "0-9",
               "tiers": {
-                "25": 73,
-                "75": 73,
-                "100": 73
+                "25": 73.0,
+                "75": 73.0,
+                "100": 73.0
               },
               "transport": "UPS",
               "pickup_lead": "3天",
               "sign_lead": "5天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -59,22 +61,24 @@
           "transport": "UPS",
           "transport_class": "快递",
           "vol_divisor": 5000,
-          "clearance_fee": 200,
+          "clearance_fee": 200.0,
           "pickup_lead": "3天",
           "sign_lead": "5天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "0-9",
               "tiers": {
-                "25": 56,
-                "75": 56,
-                "100": 56
+                "25": 56.0,
+                "75": 56.0,
+                "100": 56.0
               },
               "transport": "UPS",
               "pickup_lead": "3天",
               "sign_lead": "5天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -93,18 +97,20 @@
           "pickup_lead": "3天",
           "sign_lead": "5天",
           "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "0-9",
               "tiers": {
-                "15": 70,
-                "75": 61,
-                "101": 58
+                "15": 70.0,
+                "75": 61.0,
+                "101": 58.0
               },
               "transport": "空运直飞",
               "pickup_lead": "3天",
               "sign_lead": "5天",
-              "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外"
+              "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -123,18 +129,20 @@
           "pickup_lead": "3天",
           "sign_lead": "5天",
           "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "0-9",
               "tiers": {
-                "15": 76,
-                "75": 66,
-                "101": 64
+                "15": 76.0,
+                "75": 66.0,
+                "101": 64.0
               },
               "transport": "空运直飞",
               "pickup_lead": "3天",
               "sign_lead": "5天",
-              "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外"
+              "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -153,18 +161,20 @@
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
           "comp_penalty": "入仓次日起，超9个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "0-9",
               "tiers": {
-                "15": 68,
-                "75": 58,
-                "101": 57
+                "15": 68.0,
+                "75": 58.0,
+                "101": 57.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "入仓次日起，超9个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外"
+              "comp_penalty": "入仓次日起，超9个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -183,18 +193,20 @@
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
           "comp_penalty": "入仓次日起，超9个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "0-9",
               "tiers": {
-                "15": 74,
-                "75": 64,
-                "101": 63
+                "15": 74.0,
+                "75": 64.0,
+                "101": 63.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "入仓次日起，超9个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外"
+              "comp_penalty": "入仓次日起，超9个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -213,6 +225,7 @@
           "pickup_lead": "13天",
           "sign_lead": "13-15天",
           "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "8-9",
@@ -224,7 +237,8 @@
               "transport": "美森CLX",
               "pickup_lead": "13天",
               "sign_lead": "13-15天",
-              "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "4-7",
@@ -236,7 +250,8 @@
               "transport": "美森CLX",
               "pickup_lead": "13天",
               "sign_lead": "15-17天",
-              "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "0-3",
@@ -248,7 +263,8 @@
               "transport": "美森CLX",
               "pickup_lead": "13天",
               "sign_lead": "17-20天",
-              "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第14天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -260,12 +276,14 @@
         {
           "code": "US-T13-LAX",
           "name": "美国海卡13天-洛杉矶",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "13天",
           "sign_lead": "13-16天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "ONT8、LGB8、LAX9、SBD1、SBD2、POC1、POC2、POC3、IUSP、IUSJ、IUTJ",
@@ -274,9 +292,11 @@
                 "75": 12.6,
                 "101": 12.6
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "13-16天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "SNA4、XLX7、ONT9、IUSW、IUTI、IUSQ、LAX1、LAX2T、LGB6、PSP3、LGB4、IUTL",
@@ -285,9 +305,11 @@
                 "75": 12.7,
                 "101": 12.7
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "15-18天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "GYR3、GYR2、SMF3、SJC7、SCK1、SCK4、LAS1、VGT2、GEU2、GEU3、GEU5、MIT2、HLI2、SCK8、TCY2、TCY1、QXY8、MCC1",
@@ -296,9 +318,11 @@
                 "75": 13.1,
                 "101": 13.1
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "18-20天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ABQ2",
@@ -307,9 +331,11 @@
                 "75": 14.2,
                 "101": 14.2
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "20-23天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "MDW2、IND9、FWA4、MEM1、RFD2、 IGQ2、ORD2、FTW1、PSC2、SAT1、IAH3",
@@ -318,9 +344,11 @@
                 "75": 15.2,
                 "101": 15.2
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "20-23天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "STL4、BNA6、JVL1、TOL3、DET1、DET2、MQJ1、MCI4、CMH2、CMH3、STL3、FOE1、MKC4",
@@ -329,9 +357,11 @@
                 "75": 15.5,
                 "101": 15.5
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "20-23天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "前晋四海外仓 91745/91763",
@@ -340,9 +370,11 @@
                 "75": 15.6,
                 "101": 13.6
               },
+              "transport": null,
               "pickup_lead": "13天",
               "sign_lead": "15-18天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "前晋四海外仓 30122/30071",
@@ -351,9 +383,11 @@
                 "75": 15.6,
                 "101": 13.6
               },
+              "transport": null,
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库",
@@ -362,9 +396,11 @@
                 "75": 15.6,
                 "101": 13.6
               },
+              "transport": null,
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -383,6 +419,7 @@
           "pickup_lead": "17天",
           "sign_lead": "17-19天",
           "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "8-9",
@@ -394,7 +431,8 @@
               "transport": "以星带托            EMC定提        合德快提",
               "pickup_lead": "17天",
               "sign_lead": "17-19天",
-              "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "4-7",
@@ -406,7 +444,8 @@
               "transport": "以星带托            EMC定提        合德快提",
               "pickup_lead": "17天",
               "sign_lead": "19-21天",
-              "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "0-3",
@@ -418,7 +457,8 @@
               "transport": "以星带托            EMC定提        合德快提",
               "pickup_lead": "17天",
               "sign_lead": "21-24天",
-              "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第18天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -430,12 +470,14 @@
         {
           "code": "US-T17-LAX",
           "name": "美国海卡17天-洛杉矶",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "17天",
           "sign_lead": "16-20天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "ONT8、LGB8、LAX9、SBD1、SBD2、POC1、POC2、POC3、IUSP、IUSJ、IUTJ",
@@ -444,9 +486,11 @@
                 "75": 9.1,
                 "101": 9.1
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "16-20天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "SNA4、XLX7、ONT9、IUSW、IUTI、IUSQ、LAX1、LAX2T、LGB6、PSP3、LGB4、IUTL",
@@ -455,9 +499,11 @@
                 "75": 9.2,
                 "101": 9.2
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "20-24天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "GYR3、GYR2、SMF3、SJC7、SCK1、SCK4、LAS1、VGT2、GEU2、GEU3、GEU5、MIT2、HLI2、SCK8、TCY2、TCY1、QXY8、MCC1",
@@ -466,9 +512,11 @@
                 "75": 9.6,
                 "101": 9.6
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "18-22天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ABQ2",
@@ -477,9 +525,11 @@
                 "75": 10.7,
                 "101": 10.7
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "22-26天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "MDW2、IND9、FWA4、MEM1、RFD2、 IGQ2、ORD2、FTW1、PSC2、SAT1、IAH3、BJC1",
@@ -488,9 +538,11 @@
                 "75": 11.8,
                 "101": 11.8
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "22-26天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "STL4、BNA6、JVL1、TOL3、DET1、DET2、MQJ1、MCI4、CMH2、CMH3、STL3、FOE1、MKC4",
@@ -499,9 +551,11 @@
                 "75": 12.1,
                 "101": 12.1
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "22-26天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "前晋四海外仓 91745/91763",
@@ -510,9 +564,11 @@
                 "75": 12.1,
                 "101": 10.1
               },
+              "transport": null,
               "pickup_lead": "17天",
               "sign_lead": "18-22天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "前晋四海外仓 30122/30071",
@@ -521,9 +577,11 @@
                 "75": 12.1,
                 "101": 10.1
               },
+              "transport": null,
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库",
@@ -532,9 +590,11 @@
                 "75": 12.1,
                 "101": 10.1
               },
+              "transport": null,
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -553,6 +613,7 @@
           "pickup_lead": "21天",
           "sign_lead": "21-23天",
           "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "8-9",
@@ -564,7 +625,8 @@
               "transport": "OA快船",
               "pickup_lead": "21天",
               "sign_lead": "21-23天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "4-7",
@@ -576,7 +638,8 @@
               "transport": "OA快船",
               "pickup_lead": "21天",
               "sign_lead": "23-25天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "0-3",
@@ -588,7 +651,8 @@
               "transport": "OA快船",
               "pickup_lead": "21天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -600,12 +664,14 @@
         {
           "code": "US-T21-LAX",
           "name": "美国海卡21天-洛杉矶",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "21天",
           "sign_lead": "20-24天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "ONT8、LGB8、LAX9、SBD1、SBD2、POC1、POC2、POC3、IUSP、IUSJ、IUTJ",
@@ -614,9 +680,11 @@
                 "75": 7.4,
                 "101": 7.4
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "20-24天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "SNA4、XLX7、ONT9、IUSW、IUTI、IUSQ、LAX1、LAX2T、LGB6、PSP3、LGB4、IUTL",
@@ -625,9 +693,11 @@
                 "75": 7.5,
                 "101": 7.5
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "24-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "GYR3、GYR2、SMF3、SJC7、SKC1、SCK4、LAS1、VGT2、GEU2、GEU3、GEU5、MIT2、HLI2、SCK8、TCY2、TCY1、QXY8、MCC1",
@@ -636,9 +706,11 @@
                 "75": 8.1,
                 "101": 8.1
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "22-26天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "FAT2、SMF6、MCE1、PHX7、PHX5、IUTE、OAK3、LAS6、QZZ7、IAZ1",
@@ -647,9 +719,11 @@
                 "75": 8.2,
                 "101": 8.2
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ABQ2",
@@ -658,9 +732,11 @@
                 "75": 9.1,
                 "101": 9.1
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "25-32天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "MDW2、IND9、FWA4、MEM1、RFD2、 IGQ2、ORD2、FTW1、PSC2、SAT1、IAH3、BJC1",
@@ -669,9 +745,11 @@
                 "75": 10.3,
                 "101": 10.3
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "27-32天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "STL4、PPO4、LAN2、BNA6、JVL1、TOL3、DET1、DET2、MQJ1、MCI4、CMH2、CMH3、STL3、FOE1、MKC4",
@@ -680,9 +758,11 @@
                 "75": 10.6,
                 "101": 10.6
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "27-32天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "前晋四海外仓 91745/91763",
@@ -691,9 +771,11 @@
                 "75": 10.4,
                 "101": 8.4
               },
+              "transport": null,
               "pickup_lead": "21天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "前晋四海外仓 30122/30071",
@@ -702,9 +784,11 @@
                 "75": 10.4,
                 "101": 8.4
               },
+              "transport": null,
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库",
@@ -713,9 +797,11 @@
                 "75": 10.4,
                 "101": 8.4
               },
+              "transport": null,
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -734,6 +820,7 @@
           "pickup_lead": "35天",
           "sign_lead": "30-35天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "MDW2、ORD2、IGQ2、RFD2、RFD4、JVL1、MDW6、沃-ORD1S",
@@ -745,7 +832,8 @@
               "transport": "OA直航",
               "pickup_lead": "35天",
               "sign_lead": "30-35天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "IND9、FWA4、MQJ1、MQJ2、STL4、IND4、IND5、",
@@ -757,7 +845,8 @@
               "transport": "OA直航",
               "pickup_lead": "35天",
               "sign_lead": "32-37天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "沃-IND2、、沃-IND3、沃-IND2N、沃-IND2T",
@@ -769,7 +858,8 @@
               "transport": "OA直航",
               "pickup_lead": "35天",
               "sign_lead": "32-37天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "DET1、DET2、CMH2、CMH3、CMH7、TOL3",
@@ -781,7 +871,8 @@
               "transport": "OA直航",
               "pickup_lead": "35天",
               "sign_lead": "32-37天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "FOE1、MKC4、MEM1、MCI3、STL3、MCI4、、沃-KS1、沃-MCI1N",
@@ -793,7 +884,8 @@
               "transport": "OA直航",
               "pickup_lead": "35天",
               "sign_lead": "32-37天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库单询",
@@ -805,7 +897,8 @@
               "transport": "OA直航",
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -824,18 +917,20 @@
           "pickup_lead": "40天",
           "sign_lead": "35-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "HOU8、HOU3、HOU2、HOU1、IAH3",
               "tiers": {
-                "15": 10,
-                "75": 10,
-                "101": 10
+                "15": 10.0,
+                "75": 10.0,
+                "101": 10.0
               },
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "FTW9、FTW1、FTW5、FTW3、SAT1、IUSF、DFW7、DFW6、DAL3、SAT6、SAT4、IUTH",
@@ -847,7 +942,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "MEM1、LFT1、OKC2、LIT2、ICT2、FOE1、沃-DFW5S",
@@ -859,7 +955,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库单询",
@@ -871,7 +968,8 @@
               "transport": "OA直航",
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -890,6 +988,7 @@
           "pickup_lead": "28天",
           "sign_lead": "25-28天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "ABE8、ACY2、TEB6、TEB3、TEB4、TEB9",
@@ -901,7 +1000,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "28天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ABE4、AVP1",
@@ -913,7 +1013,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "28天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "PHL6、LBE1、PIT2、ALB1、SWF1、SWF2",
@@ -925,7 +1026,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "28天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "IGL1、DCA6、HGR6",
@@ -937,7 +1039,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "28天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "BWI4、RMN3、ORF2、XRI3",
@@ -949,7 +1052,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "28天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "CLT2、TOL3",
@@ -961,7 +1065,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "28天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库单询",
@@ -973,7 +1078,8 @@
               "transport": "以星           海铁联运",
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -992,6 +1098,7 @@
           "pickup_lead": "40天",
           "sign_lead": "35-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "TEB6、ABE8、TEB9、ACY2、XEW5、ABE4",
@@ -1003,7 +1110,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "TEB3、TEB4、AVP1、HEA2、HIA1",
@@ -1015,7 +1123,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "SWF1、SWF2、ALB1、ILG1、DCA6、MDT4、PHL6、MDT1、IUSL、IUST、LBE1、PIT2",
@@ -1027,7 +1136,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "CHO1、BOS7、RMN3、ORF2、XRI3、XLX1、HGR6、RIC1、BWI4",
@@ -1039,7 +1149,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "RDU2、CLT3、CLT2、GSO1、XLX6、IUSR、AKR1",
@@ -1051,7 +1162,8 @@
               "transport": "OA直航",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "其他仓库单询",
@@ -1063,7 +1175,8 @@
               "transport": "OA直航",
               "pickup_lead": "/",
               "sign_lead": "/",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1075,11 +1188,14 @@
         {
           "code": null,
           "name": "美国海卡45天-萨凡纳",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "45",
           "sign_lead": "40-45天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "沃-ATL1、沃-ATL3、CLT2、CLT3、JAX3、GSP1、\nMGE1、IUSR、XLX6、XAV3、CAE1",
@@ -1088,8 +1204,11 @@
                 "75": 9.5,
                 "101": 9.5
               },
+              "transport": null,
               "pickup_lead": "45",
-              "sign_lead": "40-45天"
+              "sign_lead": "40-45天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "MCO2、MGE3、GSO1、RYY2、RDU2",
@@ -1098,18 +1217,24 @@
                 "75": 9.8,
                 "101": 9.8
               },
+              "transport": null,
               "pickup_lead": "45天",
-              "sign_lead": "40-45天"
+              "sign_lead": "40-45天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "MCO1、TPA2、TPA3、TPA6、PBI3、XPB2",
               "tiers": {
-                "15": 10,
-                "75": 10,
-                "101": 10
+                "15": 10.0,
+                "75": 10.0,
+                "101": 10.0
               },
+              "transport": null,
               "pickup_lead": "45天",
-              "sign_lead": "40-45天"
+              "sign_lead": "40-45天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "BNA2、BNA6、CHA2、HSV1、HSV2、TMB8、PBI2",
@@ -1118,8 +1243,11 @@
                 "75": 10.3,
                 "101": 10.3
               },
+              "transport": null,
               "pickup_lead": "45天",
-              "sign_lead": "40-45天"
+              "sign_lead": "40-45天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "其他仓库单询",
@@ -1128,8 +1256,11 @@
                 "75": 10.3,
                 "101": 10.3
               },
+              "transport": null,
               "pickup_lead": "/",
-              "sign_lead": "/"
+              "sign_lead": "/",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1149,20 +1280,24 @@
           "transport": "UPS",
           "transport_class": "快递",
           "vol_divisor": 5000,
-          "clearance_fee": 200,
+          "clearance_fee": 200.0,
           "pickup_lead": "3天",
           "sign_lead": "5天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
               "tiers": {
-                "25": 54,
-                "75": 54,
-                "101": 54
+                "25": 54.0,
+                "75": 54.0,
+                "101": 54.0
               },
               "transport": "UPS",
               "pickup_lead": "3天",
-              "sign_lead": "5天"
+              "sign_lead": "5天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1181,6 +1316,7 @@
           "pickup_lead": "5天",
           "sign_lead": "5-7天",
           "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1192,7 +1328,8 @@
               "transport": "空运直飞",
               "pickup_lead": "5天",
               "sign_lead": "5-7天",
-              "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外"
+              "comp_penalty": "入仓次日起，超5个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1207,9 +1344,11 @@
           "transport": "空运直飞",
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "5天",
           "sign_lead": "5-7天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1220,7 +1359,9 @@
               },
               "transport": "空运直飞",
               "pickup_lead": "5天",
-              "sign_lead": "5-7天"
+              "sign_lead": "5-7天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1239,6 +1380,7 @@
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
           "comp_penalty": "入仓次日起，超8个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1250,7 +1392,8 @@
               "transport": "空运转飞",
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "入仓次日起，超8个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外"
+              "comp_penalty": "入仓次日起，超8个工作日未提取，退运费1RMB/KG/工作日，不可抗力因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1265,9 +1408,11 @@
           "transport": "空运转飞",
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1278,7 +1423,9 @@
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
-              "sign_lead": "8-12天"
+              "sign_lead": "8-12天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1297,18 +1444,20 @@
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
               "tiers": {
-                "25": 41,
-                "75": 41,
-                "101": 39
+                "25": 41.0,
+                "75": 41.0,
+                "101": 39.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1323,20 +1472,24 @@
           "transport": "空运转飞",
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
               "tiers": {
-                "25": 38,
-                "75": 38,
-                "101": 36
+                "25": 38.0,
+                "75": 38.0,
+                "101": 36.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
-              "sign_lead": "8-12天"
+              "sign_lead": "8-12天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1355,6 +1508,7 @@
           "pickup_lead": "20天",
           "sign_lead": "20-25天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1366,7 +1520,8 @@
               "transport": "卡航",
               "pickup_lead": "20天",
               "sign_lead": "20-25天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1378,11 +1533,14 @@
         {
           "code": "UK-PE20",
           "name": "英国卡航20天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "20天",
           "sign_lead": "20-25天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1391,8 +1549,11 @@
                 "75": 14.8,
                 "101": 13.8
               },
+              "transport": null,
               "pickup_lead": "20天",
-              "sign_lead": "20-25天"
+              "sign_lead": "20-25天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1404,11 +1565,14 @@
         {
           "code": "UK-T20",
           "name": "英国卡航20天-卡派",
+          "transport": null,
           "transport_class": "卡航铁路",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "20天",
           "sign_lead": "20天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4、LBA8",
@@ -1417,8 +1581,11 @@
                 "75": 17.2,
                 "101": 16.2
               },
+              "transport": null,
               "pickup_lead": "20天",
-              "sign_lead": "20天"
+              "sign_lead": "20天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1430,11 +1597,14 @@
         {
           "code": "UK-PT20",
           "name": "英国卡航20天PVA-卡派",
+          "transport": null,
           "transport_class": "卡航铁路",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "20天",
           "sign_lead": "20天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4、LBA8",
@@ -1443,8 +1613,11 @@
                 "75": 14.2,
                 "101": 13.2
               },
+              "transport": null,
               "pickup_lead": "20天",
-              "sign_lead": "20天"
+              "sign_lead": "20天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1463,6 +1636,7 @@
           "pickup_lead": "25天",
           "sign_lead": "25-28天",
           "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超1.5/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1474,7 +1648,8 @@
               "transport": "快铁",
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超1.5/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超1.5/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1486,11 +1661,14 @@
         {
           "code": "UK-PE25",
           "name": "英国快铁25天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "25天",
           "sign_lead": "25-28天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1499,8 +1677,11 @@
                 "75": 14.4,
                 "101": 13.4
               },
+              "transport": null,
               "pickup_lead": "25天",
-              "sign_lead": "25-28天"
+              "sign_lead": "25-28天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1512,12 +1693,14 @@
         {
           "code": "UK-T25",
           "name": "英国快铁25天-卡派",
+          "transport": null,
           "transport_class": "专线",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "25天",
           "sign_lead": "25-28天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4、LBA8",
@@ -1526,9 +1709,11 @@
                 "75": 17.6,
                 "101": 16.6
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1540,11 +1725,14 @@
         {
           "code": "UK-PT25",
           "name": "英国快铁25天PVA-卡派",
+          "transport": null,
           "transport_class": "专线",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "25天",
           "sign_lead": "25-28天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4、LBA8",
@@ -1553,8 +1741,11 @@
                 "75": 13.9,
                 "101": 12.9
               },
+              "transport": null,
               "pickup_lead": "25天",
-              "sign_lead": "25-28天"
+              "sign_lead": "25-28天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1573,6 +1764,7 @@
           "pickup_lead": "30天",
           "sign_lead": "28-33天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1584,7 +1776,8 @@
               "transport": "慢铁",
               "pickup_lead": "30天",
               "sign_lead": "28-33天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1596,11 +1789,14 @@
         {
           "code": "UK-PE30",
           "name": "英国慢铁30天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "30天",
           "sign_lead": "28-33天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1609,8 +1805,11 @@
                 "75": 11.8,
                 "101": 11.8
               },
+              "transport": null,
               "pickup_lead": "30天",
-              "sign_lead": "28-33天"
+              "sign_lead": "28-33天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1622,11 +1821,14 @@
         {
           "code": "UK-T30",
           "name": "英国慢铁30天-卡派",
+          "transport": null,
           "transport_class": "专线",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "30天",
           "sign_lead": "28-33天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4、LBA8",
@@ -1635,8 +1837,11 @@
                 "75": 15.3,
                 "101": 14.3
               },
+              "transport": null,
               "pickup_lead": "30天",
-              "sign_lead": "28-33天"
+              "sign_lead": "28-33天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1648,11 +1853,14 @@
         {
           "code": "UK-PT30",
           "name": "英国慢铁30天PVA-卡派",
+          "transport": null,
           "transport_class": "专线",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "30天",
           "sign_lead": "28-33天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4、LBA8",
@@ -1661,8 +1869,11 @@
                 "75": 12.3,
                 "101": 11.3
               },
+              "transport": null,
               "pickup_lead": "30天",
-              "sign_lead": "28-33天"
+              "sign_lead": "28-33天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1681,6 +1892,7 @@
           "pickup_lead": "35天",
           "sign_lead": "35-50天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1692,7 +1904,8 @@
               "transport": "海运",
               "pickup_lead": "35天",
               "sign_lead": "35-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1704,11 +1917,14 @@
         {
           "code": "UK-PE35",
           "name": "英国海运35天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "35天",
           "sign_lead": "35-50天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "1区",
@@ -1717,8 +1933,11 @@
                 "75": 7.2,
                 "101": 6.2
               },
+              "transport": null,
               "pickup_lead": "35天",
-              "sign_lead": "35-50天"
+              "sign_lead": "35-50天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1730,11 +1949,14 @@
         {
           "code": "UK-T35",
           "name": "英国海运35天-卡派",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "35天",
           "sign_lead": "35-50天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4",
@@ -1743,8 +1965,11 @@
                 "75": 9.2,
                 "101": 8.2
               },
+              "transport": null,
               "pickup_lead": "35天",
-              "sign_lead": "35-50天"
+              "sign_lead": "35-50天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "LPL2、LBA8、EMA3、MAN4、BHX2 BHX7、LBA2、CWL1、DSA7、LTN7 XBH7、XDS1、XUKA、XUKS",
@@ -1753,8 +1978,11 @@
                 "75": 9.6,
                 "101": 8.6
               },
+              "transport": null,
               "pickup_lead": "35天",
-              "sign_lead": "35-50天"
+              "sign_lead": "35-50天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1766,11 +1994,14 @@
         {
           "code": "UK-PT35",
           "name": "英国海运35天PVA-卡派",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
-          "clearance_fee": 350,
+          "clearance_fee": 350.0,
           "pickup_lead": "35天",
           "sign_lead": "35-50天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "BHX4、BHX8、LBA4",
@@ -1779,8 +2010,11 @@
                 "75": 6.2,
                 "101": 5.2
               },
+              "transport": null,
               "pickup_lead": "35天",
-              "sign_lead": "35-50天"
+              "sign_lead": "35-50天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "LPL2、LBA8、EMA3、MAN4、BHX2 BHX7、LBA2、CWL1、DSA7、LTN7 XBH7、XDS1、XUKA、XUKS",
@@ -1789,8 +2023,11 @@
                 "75": 6.6,
                 "101": 5.6
               },
+              "transport": null,
               "pickup_lead": "35天",
-              "sign_lead": "35-50天"
+              "sign_lead": "35-50天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1819,9 +2056,9 @@
             {
               "zone": "德国",
               "tiers": {
-                "25": 38,
-                "75": 36,
-                "100": 35
+                "25": 38.0,
+                "75": 36.0,
+                "100": 35.0
               },
               "transport": "空运直飞",
               "pickup_lead": "6天",
@@ -1832,9 +2069,9 @@
             {
               "zone": "法国、捷克、波兰、荷兰、比利时",
               "tiers": {
-                "25": 40,
-                "75": 38,
-                "100": 37
+                "25": 40.0,
+                "75": 38.0,
+                "100": 37.0
               },
               "transport": "空运直飞",
               "pickup_lead": "6天",
@@ -1845,9 +2082,9 @@
             {
               "zone": "西班牙、意大利",
               "tiers": {
-                "25": 42,
-                "75": 40,
-                "100": 39
+                "25": 42.0,
+                "75": 40.0,
+                "100": 39.0
               },
               "transport": "空运直飞",
               "pickup_lead": "6天",
@@ -1865,41 +2102,53 @@
         {
           "code": "EU-PE6-CN",
           "name": "欧洲空派6天PVA-大陆",
+          "transport": null,
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "6天",
           "sign_lead": "6-8天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
               "tiers": {
-                "25": 37,
-                "75": 35,
-                "100": 34
+                "25": 37.0,
+                "75": 35.0,
+                "100": 34.0
               },
+              "transport": null,
               "pickup_lead": "6天",
-              "sign_lead": "6-8天"
+              "sign_lead": "6-8天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "法国、捷克、波兰、荷兰",
               "tiers": {
-                "25": 39,
-                "75": 37,
-                "100": 36
+                "25": 39.0,
+                "75": 37.0,
+                "100": 36.0
               },
+              "transport": null,
               "pickup_lead": "6天",
-              "sign_lead": "6-8天"
+              "sign_lead": "6-8天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "西班牙、意大利",
               "tiers": {
-                "25": 41,
-                "75": 39,
-                "100": 38
+                "25": 41.0,
+                "75": 39.0,
+                "100": 38.0
               },
+              "transport": null,
               "pickup_lead": "6天",
-              "sign_lead": "6-8天"
+              "sign_lead": "6-8天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -1911,6 +2160,7 @@
         {
           "code": "EU-E6-HK",
           "name": "欧洲空派6天-香港",
+          "transport": null,
           "transport_class": "空运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
@@ -1922,10 +2172,11 @@
             {
               "zone": "德国",
               "tiers": {
-                "25": 49,
-                "75": 47,
-                "100": 46
+                "25": 49.0,
+                "75": 47.0,
+                "100": 46.0
               },
+              "transport": null,
               "pickup_lead": "6天",
               "sign_lead": "6-8天",
               "comp_penalty": "无",
@@ -1934,10 +2185,11 @@
             {
               "zone": "法国、捷克、波兰、荷兰、比利时",
               "tiers": {
-                "25": 51,
-                "75": 49,
-                "100": 48
+                "25": 51.0,
+                "75": 49.0,
+                "100": 48.0
               },
+              "transport": null,
               "pickup_lead": "6天",
               "sign_lead": "6-8天",
               "comp_penalty": "无",
@@ -1946,10 +2198,11 @@
             {
               "zone": "西班牙、意大利",
               "tiers": {
-                "25": 53,
-                "75": 51,
-                "100": 50
+                "25": 53.0,
+                "75": 51.0,
+                "100": 50.0
               },
+              "transport": null,
               "pickup_lead": "6天",
               "sign_lead": "6-8天",
               "comp_penalty": "无",
@@ -1965,41 +2218,53 @@
         {
           "code": "EU-PE6-HK",
           "name": "欧洲空派6天PVA-香港",
+          "transport": null,
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "6天",
           "sign_lead": "6-8天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
               "tiers": {
-                "25": 48,
-                "75": 46,
-                "100": 45
+                "25": 48.0,
+                "75": 46.0,
+                "100": 45.0
               },
+              "transport": null,
               "pickup_lead": "6天",
-              "sign_lead": "6-8天"
+              "sign_lead": "6-8天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "法国、捷克、波兰、荷兰",
               "tiers": {
-                "25": 50,
-                "75": 48,
-                "100": 47
+                "25": 50.0,
+                "75": 48.0,
+                "100": 47.0
               },
+              "transport": null,
               "pickup_lead": "6天",
-              "sign_lead": "6-8天"
+              "sign_lead": "6-8天",
+              "comp_penalty": null,
+              "remark": null
             },
             {
               "zone": "西班牙、意大利",
               "tiers": {
-                "25": 52,
-                "75": 50,
-                "100": 49
+                "25": 52.0,
+                "75": 50.0,
+                "100": 49.0
               },
+              "transport": null,
               "pickup_lead": "6天",
-              "sign_lead": "6-8天"
+              "sign_lead": "6-8天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2023,9 +2288,9 @@
             {
               "zone": "德国",
               "tiers": {
-                "25": 33,
-                "75": 31,
-                "100": 30
+                "25": 33.0,
+                "75": 31.0,
+                "100": 30.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -2036,9 +2301,9 @@
             {
               "zone": "法国、捷克、波兰、荷兰",
               "tiers": {
-                "25": 34,
-                "75": 32,
-                "100": 31
+                "25": 34.0,
+                "75": 32.0,
+                "100": 31.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -2049,9 +2314,9 @@
             {
               "zone": "西班牙、意大利",
               "tiers": {
-                "25": 35,
-                "75": 33,
-                "100": 32
+                "25": 35.0,
+                "75": 33.0,
+                "100": 32.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -2069,45 +2334,53 @@
         {
           "code": "EU-PE8-CN",
           "name": "欧洲空派8天PVA-大陆",
+          "transport": null,
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "8天",
           "sign_lead": "8-12天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
               "tiers": {
-                "25": 32,
-                "75": 30,
-                "100": 29
+                "25": 32.0,
+                "75": 30.0,
+                "100": 29.0
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "法国、捷克、波兰、荷兰",
               "tiers": {
-                "25": 33,
-                "75": 31,
-                "100": 30
+                "25": 33.0,
+                "75": 31.0,
+                "100": 30.0
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "西班牙、意大利",
               "tiers": {
-                "25": 34,
-                "75": 32,
-                "100": 31
+                "25": 34.0,
+                "75": 32.0,
+                "100": 31.0
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "8-12天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2119,6 +2392,7 @@
         {
           "code": "EU-E8-KR",
           "name": "欧洲空派8天-韩国",
+          "transport": null,
           "transport_class": "空运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
@@ -2134,6 +2408,7 @@
                 "75": 33.5,
                 "100": 32.5
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "10-13天",
               "comp_penalty": "无",
@@ -2146,6 +2421,7 @@
                 "75": 35.5,
                 "100": 34.5
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "10-13天",
               "comp_penalty": "无",
@@ -2158,6 +2434,7 @@
                 "75": 37.5,
                 "100": 36.5
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "10-13天",
               "comp_penalty": "无",
@@ -2173,12 +2450,14 @@
         {
           "code": "EU-PE8-KR",
           "name": "欧洲空派8天PVA-韩国",
+          "transport": null,
           "transport_class": "空运",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "8天",
           "sign_lead": "10-13天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
@@ -2187,9 +2466,11 @@
                 "75": 32.5,
                 "100": 31.5
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "10-13天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "法国、捷克、波兰、荷兰",
@@ -2198,9 +2479,11 @@
                 "75": 34.5,
                 "100": 33.5
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "10-13天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "西班牙、意大利",
@@ -2209,9 +2492,11 @@
                 "75": 36.5,
                 "100": 35.5
               },
+              "transport": null,
               "pickup_lead": "8天",
               "sign_lead": "10-13天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2230,30 +2515,33 @@
           "pickup_lead": "20天",
           "sign_lead": "20-25天",
           "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
               "tiers": {
-                "25": 18,
-                "75": 18,
-                "100": 16
+                "25": 18.0,
+                "75": 18.0,
+                "100": 16.0
               },
               "transport": "卡航",
               "pickup_lead": "20天",
               "sign_lead": "20-25天",
-              "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "法国、荷兰、奥地利、比利时、波兰、捷克",
               "tiers": {
-                "25": 21,
-                "75": 21,
-                "100": 19
+                "25": 21.0,
+                "75": 21.0,
+                "100": 19.0
               },
               "transport": "卡航",
               "pickup_lead": "20天",
               "sign_lead": "20-25天",
-              "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙",
@@ -2265,7 +2553,8 @@
               "transport": "卡航",
               "pickup_lead": "20天",
               "sign_lead": "20-25天",
-              "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "卡航发车次日起，第28天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2284,6 +2573,7 @@
           "pickup_lead": "20天",
           "sign_lead": "20-25天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、WRO5、HAJ1",
@@ -2295,7 +2585,8 @@
               "transport": "卡航卡派",
               "pickup_lead": "20天",
               "sign_lead": "20-25天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "DTM1、BER8、KSF7、DTM9、WRO5-PL",
@@ -2307,7 +2598,8 @@
               "transport": "卡航卡派",
               "pickup_lead": "20天",
               "sign_lead": "20-25天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2326,42 +2618,46 @@
           "pickup_lead": "25天",
           "sign_lead": "25-30天",
           "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
               "tiers": {
-                "25": 16,
-                "75": 15,
+                "25": 16.0,
+                "75": 15.0,
                 "100": 14.5
               },
               "transport": "快铁",
               "pickup_lead": "25天",
               "sign_lead": "25-30天",
-              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "法国、荷兰、比利时、\n卢森堡、波兰、捷克、丹麦",
               "tiers": {
-                "25": 18,
-                "75": 17,
+                "25": 18.0,
+                "75": 17.0,
                 "100": 16.5
               },
               "transport": "快铁",
               "pickup_lead": "25天",
               "sign_lead": "25-30天",
-              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙 、葡萄牙",
               "tiers": {
-                "25": 19,
-                "75": 18,
+                "25": 19.0,
+                "75": 18.0,
                 "100": 17.5
               },
               "transport": "快铁",
               "pickup_lead": "25天",
               "sign_lead": "25-30天",
-              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第30天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2373,12 +2669,14 @@
         {
           "code": "EU-PE25",
           "name": "欧洲快铁25天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "25天",
           "sign_lead": "25-32天",
           "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
@@ -2386,9 +2684,11 @@
                 "75": 15.7,
                 "100": 13.7
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-32天",
-              "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "法国、波兰、捷克",
@@ -2396,9 +2696,11 @@
                 "75": 17.7,
                 "100": 15.7
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-32天",
-              "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙",
@@ -2406,9 +2708,11 @@
                 "75": 18.7,
                 "100": 16.7
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-32天",
-              "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2427,6 +2731,7 @@
           "pickup_lead": "25天",
           "sign_lead": "26-32天",
           "comp_penalty": "班列发车次日起，第32天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、DTM1",
@@ -2438,19 +2743,21 @@
               "transport": "快铁卡派",
               "pickup_lead": "25天",
               "sign_lead": "26-32天",
-              "comp_penalty": "班列发车次日起，第32天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第32天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "WRO5、HAJ1、XWR3、XDR1、XPLC、WRO1、LCJ2、XPO1、KTW5、BER8",
               "tiers": {
                 "25": 15.5,
                 "75": 14.5,
-                "100": 14
+                "100": 14.0
               },
               "transport": "快铁卡派",
               "pickup_lead": "25天",
               "sign_lead": "26-32天",
-              "comp_penalty": "班列发车次日起，第32天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第32天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2462,12 +2769,14 @@
         {
           "code": "EU-PT25",
           "name": "欧洲快铁25天PVA-卡派",
+          "transport": null,
           "transport_class": "专线",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "25天",
           "sign_lead": "26-34天",
           "comp_penalty": "班列发车次日起，第34天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、DTM1",
@@ -2475,9 +2784,11 @@
                 "75": 14.7,
                 "100": 12.7
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "26-34天",
-              "comp_penalty": "班列发车次日起，第34天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "班列发车次日起，第34天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2496,42 +2807,46 @@
           "pickup_lead": "30天",
           "sign_lead": "30-36天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
               "tiers": {
-                "25": 15,
-                "75": 14,
+                "25": 15.0,
+                "75": 14.0,
                 "100": 13.5
               },
               "transport": "慢铁",
               "pickup_lead": "30天",
               "sign_lead": "30-36天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "法国、波兰、捷克",
               "tiers": {
-                "25": 17,
-                "75": 16,
+                "25": 17.0,
+                "75": 16.0,
                 "100": 15.5
               },
               "transport": "慢铁",
               "pickup_lead": "30天",
               "sign_lead": "30-36天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙",
               "tiers": {
-                "25": 18,
-                "75": 17,
+                "25": 18.0,
+                "75": 17.0,
                 "100": 16.5
               },
               "transport": "慢铁",
               "pickup_lead": "30天",
               "sign_lead": "30-36天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2543,12 +2858,14 @@
         {
           "code": "EU-PE30",
           "name": "欧洲慢铁30天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "30天",
           "sign_lead": "35-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
@@ -2556,9 +2873,11 @@
                 "75": 14.7,
                 "100": 12.7
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "法国、波兰、捷克",
@@ -2566,9 +2885,11 @@
                 "75": 16.7,
                 "100": 14.7
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙",
@@ -2576,9 +2897,11 @@
                 "75": 17.7,
                 "100": 15.7
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2597,6 +2920,7 @@
           "pickup_lead": "30天",
           "sign_lead": "32-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、DTM1",
@@ -2608,43 +2932,47 @@
               "transport": "慢铁卡派",
               "pickup_lead": "30天",
               "sign_lead": "32-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "WRO5、HAJ1、BER8、DTM9、KSF7、LEJ3、XWR3、XDR1、XPLC、WRO1、\nLCJ2、XPO1、KTW5、POZ1 、POZ2 PRG2、WRO2、SZZ1",
               "tiers": {
                 "25": 14.5,
                 "75": 13.5,
-                "100": 13
+                "100": 13.0
               },
               "transport": "慢铁卡派",
               "pickup_lead": "30天",
               "sign_lead": "32-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "CDG7",
               "tiers": {
                 "25": 15.5,
                 "75": 14.5,
-                "100": 14
+                "100": 14.0
               },
               "transport": "慢铁卡派",
               "pickup_lead": "30天",
               "sign_lead": "32-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ZAZ1",
               "tiers": {
                 "25": 17.5,
                 "75": 16.5,
-                "100": 16
+                "100": 16.0
               },
               "transport": "慢铁卡派",
               "pickup_lead": "30天",
               "sign_lead": "32-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2656,12 +2984,14 @@
         {
           "code": "EU-PT30",
           "name": "欧洲慢铁30天PVA-卡派",
+          "transport": null,
           "transport_class": "专线",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "30天",
           "sign_lead": "35-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、DTM1",
@@ -2669,9 +2999,11 @@
                 "75": 13.7,
                 "100": 11.7
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "WRO5、HAJ1、BER8、DTM9、KSF7、LEJ3、XWR3、XDR1、XPLC、WRO1          LCJ2、XPO1、KTW5、POZ1、           POZ2、PRG2、WRO2、SZZ1",
@@ -2679,29 +3011,35 @@
                 "75": 14.2,
                 "100": 12.2
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "CDG7",
               "tiers": {
-                "75": 16,
-                "100": 14
+                "75": 16.0,
+                "100": 14.0
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ZAZ1",
               "tiers": {
-                "75": 17,
-                "100": 15
+                "75": 17.0,
+                "100": 15.0
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2720,6 +3058,7 @@
           "pickup_lead": "35天",
           "sign_lead": "45-50天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
@@ -2731,7 +3070,8 @@
               "transport": "海运",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "法国、波兰、捷克",
@@ -2743,7 +3083,8 @@
               "transport": "海运",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙",
@@ -2755,7 +3096,8 @@
               "transport": "海运",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2767,12 +3109,14 @@
         {
           "code": "EU-PE35",
           "name": "欧洲海运35天PVA-快递",
+          "transport": null,
           "transport_class": "快递",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "35天",
           "sign_lead": "45-50天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "德国",
@@ -2780,29 +3124,35 @@
                 "75": 9.5,
                 "100": 7.5
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "法国、波兰、捷克",
               "tiers": {
-                "75": 12,
-                "100": 10
+                "75": 12.0,
+                "100": 10.0
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "意大利、西班牙",
               "tiers": {
-                "75": 13,
-                "100": 11
+                "75": 13.0,
+                "100": 11.0
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2821,6 +3171,7 @@
           "pickup_lead": "35天",
           "sign_lead": "45-50天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、DTM1",
@@ -2832,7 +3183,8 @@
               "transport": "海运卡派",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "WRO5、HAJ1、BER8、WRO1、XPO1、XWR3       \nLCJ2、KTW5",
@@ -2844,31 +3196,34 @@
               "transport": "海运卡派",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "DTM9",
               "tiers": {
-                "25": 10,
-                "75": 10,
+                "25": 10.0,
+                "75": 10.0,
                 "100": 8.5
               },
               "transport": "海运卡派",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "CDG7",
               "tiers": {
-                "25": 11,
-                "75": 11,
+                "25": 11.0,
+                "75": 11.0,
                 "100": 9.5
               },
               "transport": "海运卡派",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "ZAZ1",
@@ -2880,7 +3235,8 @@
               "transport": "海运卡派",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "商业海外仓单询",
@@ -2892,7 +3248,8 @@
               "transport": "海运卡派",
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2904,12 +3261,14 @@
         {
           "code": "EU-PT35",
           "name": "欧洲海运35天PVA-卡派",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
-          "clearance_fee": 400,
+          "clearance_fee": 400.0,
           "pickup_lead": "35天",
           "sign_lead": "45-50天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "DTM2、DTM1",
@@ -2917,9 +3276,11 @@
                 "75": 8.5,
                 "100": 6.5
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "WRO5、HAJ1、BER8",
@@ -2927,9 +3288,11 @@
                 "75": 8.8,
                 "100": 6.8
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "45-50天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2949,10 +3312,11 @@
           "transport": "UPS",
           "transport_class": "快递",
           "vol_divisor": 5000,
-          "clearance_fee": 200,
+          "clearance_fee": 200.0,
           "pickup_lead": "3天",
           "sign_lead": "3-5天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "全区",
@@ -2960,7 +3324,8 @@
               "transport": "UPS",
               "pickup_lead": "3天",
               "sign_lead": "3-5天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -2975,22 +3340,24 @@
           "transport": "UPS",
           "transport_class": "快递",
           "vol_divisor": 5000,
-          "clearance_fee": 200,
+          "clearance_fee": 200.0,
           "pickup_lead": "3天",
           "sign_lead": "3-5天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "全区",
               "tiers": {
-                "25": 59,
-                "75": 59,
-                "101": 59
+                "25": 59.0,
+                "75": 59.0,
+                "101": 59.0
               },
               "transport": "UPS",
               "pickup_lead": "3天",
               "sign_lead": "3-5天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3014,9 +3381,9 @@
             {
               "zone": "温哥华（YVR1-YVR4)",
               "tiers": {
-                "25": 43,
-                "75": 42,
-                "101": 40
+                "25": 43.0,
+                "75": 42.0,
+                "101": 40.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -3027,9 +3394,9 @@
             {
               "zone": "多伦多、卡尔加里、渥太华（邮编YY/T）",
               "tiers": {
-                "25": 45,
-                "75": 44,
-                "101": 42
+                "25": 45.0,
+                "75": 44.0,
+                "101": 42.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -3040,9 +3407,9 @@
             {
               "zone": "私人地址",
               "tiers": {
-                "25": 46,
-                "75": 45,
-                "101": 44
+                "25": 46.0,
+                "75": 45.0,
+                "101": 44.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -3072,9 +3439,9 @@
             {
               "zone": "温哥华（YVR1-YVR4)",
               "tiers": {
-                "25": 74,
-                "75": 67,
-                "101": 64
+                "25": 74.0,
+                "75": 67.0,
+                "101": 64.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -3085,9 +3452,9 @@
             {
               "zone": "多伦多、卡尔加里、渥太华（邮编YY/T）",
               "tiers": {
-                "25": 75,
-                "75": 68,
-                "101": 65
+                "25": 75.0,
+                "75": 68.0,
+                "101": 65.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -3098,9 +3465,9 @@
             {
               "zone": "私人地址",
               "tiers": {
-                "25": 76,
-                "75": 69,
-                "101": 66
+                "25": 76.0,
+                "75": 69.0,
+                "101": 66.0
               },
               "transport": "空运转飞",
               "pickup_lead": "8天",
@@ -3125,6 +3492,7 @@
           "pickup_lead": "20天",
           "sign_lead": "20-22天",
           "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "多伦多（YYZ、YOO、YDD、XYY1、XYY4)",
@@ -3136,7 +3504,8 @@
               "transport": "美森",
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "卡尔加里、埃德蒙顿(YYC、YEG、XCAB、YDC)  温哥华（YVR、YXX）",
@@ -3148,7 +3517,8 @@
               "transport": "美森",
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YHM、YXU、YGK）                     渥太华（YOW)",
@@ -3160,7 +3530,8 @@
               "transport": "美森",
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
@@ -3172,7 +3543,8 @@
               "transport": "美森",
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第20天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3184,12 +3556,14 @@
         {
           "code": "CA-T20",
           "name": "加拿大海卡20天-美转加",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "20天",
           "sign_lead": "20-22天",
           "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "温哥华(YVR、YXX)",
@@ -3198,9 +3572,11 @@
                 "75": 16.4,
                 "101": 16.4
               },
+              "transport": null,
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YYZ、YOO、YHM、YXU、YGK、YDD、XYY1、XYY4)",
@@ -3209,9 +3585,11 @@
                 "75": 15.6,
                 "101": 15.6
               },
+              "transport": null,
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "卡尔加里、埃德蒙顿(YYC、YEG、XCAB、YDC)   渥太华（YOW)",
@@ -3220,9 +3598,11 @@
                 "75": 16.1,
                 "101": 16.1
               },
+              "transport": null,
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
@@ -3231,9 +3611,11 @@
                 "75": 17.6,
                 "101": 17.6
               },
+              "transport": null,
               "pickup_lead": "20天",
               "sign_lead": "20-22天",
-              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第27天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第37天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3252,18 +3634,20 @@
           "pickup_lead": "25天",
           "sign_lead": "25-28天",
           "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "卡尔加里、埃德蒙顿(YYC、YEG、XCAB、YDC)   温哥华（YVR、YXX）",
               "tiers": {
-                "25": 18,
+                "25": 18.0,
                 "75": 15.5,
                 "101": 15.5
               },
               "transport": "以星、定提、合德、EXX",
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YYZ、YOO、YDD、XYY1、XYY4)",
@@ -3275,31 +3659,34 @@
               "transport": "以星、定提、合德、EXX",
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YHM、YXU、YGK)                      渥太华（YOW)",
               "tiers": {
-                "25": 19,
+                "25": 19.0,
                 "75": 17.5,
                 "101": 17.5
               },
               "transport": "以星、定提、合德、EXX",
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
               "tiers": {
-                "25": 21,
+                "25": 21.0,
                 "75": 18.5,
                 "101": 18.5
               },
               "transport": "以星、定提、合德、EXX",
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第25天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3311,12 +3698,14 @@
         {
           "code": "CA-T25",
           "name": "加拿大海卡25天-美转加",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "25天",
           "sign_lead": "25-28天",
           "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "温哥华(YVR、YXX)",
@@ -3325,9 +3714,11 @@
                 "75": 13.2,
                 "101": 13.2
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YYZ、YOO、YHM、YXU、YGK、YDD、XYY1、XYY4)",
@@ -3336,9 +3727,11 @@
                 "75": 12.9,
                 "101": 12.9
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "卡尔加里、埃德蒙顿(YYC、YEG、XCAB、YDC)  渥太华（YOW)",
@@ -3347,9 +3740,11 @@
                 "75": 13.1,
                 "101": 13.1
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
@@ -3358,9 +3753,11 @@
                 "75": 14.1,
                 "101": 14.1
               },
+              "transport": null,
               "pickup_lead": "25天",
               "sign_lead": "25-28天",
-              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第30天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第40天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3379,18 +3776,20 @@
           "pickup_lead": "30天",
           "sign_lead": "30-35天",
           "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "卡尔加里、埃德蒙顿(YYC、YEG、XCAB、YDC)  温哥华（YVR、YXX）",
               "tiers": {
-                "25": 16,
+                "25": 16.0,
                 "75": 13.5,
                 "101": 13.5
               },
               "transport": "OA",
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YYZ、YOO、YDD、XYY1、XYY4)",
@@ -3402,31 +3801,34 @@
               "transport": "OA",
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YHM、YXU、YGK、)               渥太华（YOW)",
               "tiers": {
-                "25": 17,
+                "25": 17.0,
                 "75": 15.5,
                 "101": 15.5
               },
               "transport": "OA",
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
               "tiers": {
-                "25": 19,
+                "25": 19.0,
                 "75": 16.5,
                 "101": 16.5
               },
               "transport": "OA",
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第32天未提取，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3438,12 +3840,14 @@
         {
           "code": "CA-T30",
           "name": "加拿大海卡30天-美转加",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "30天",
           "sign_lead": "30-35天",
           "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+          "remark": null,
           "zones": [
             {
               "zone": "温哥华(YVR、YXX)",
@@ -3452,9 +3856,11 @@
                 "75": 11.4,
                 "101": 11.4
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "卡尔加里、埃德蒙顿(YYC、YEG、XCAB、YDC)    渥太华（YOW)",
@@ -3463,9 +3869,11 @@
                 "75": 11.3,
                 "101": 11.3
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "多伦多（YYZ、YOO、YHM、YXU、YGK，YDD，XYY1、XYY4)",
@@ -3474,9 +3882,11 @@
                 "75": 11.1,
                 "101": 11.1
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
@@ -3485,9 +3895,11 @@
                 "75": 13.1,
                 "101": 13.1
               },
+              "transport": null,
               "pickup_lead": "30天",
               "sign_lead": "30-35天",
-              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外"
+              "comp_penalty": "开船次日起，第35天未送仓，按0.5/KG/工作日赔付，不超3/KG，私人地址货物第45天未送仓，按0.5/KG/工作日赔付，不超3/KG，不可抗因素除外",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3506,6 +3918,7 @@
           "pickup_lead": "35天",
           "sign_lead": "35-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "温哥华(YVR，YXX)",
@@ -3517,7 +3930,8 @@
               "transport": "OA",
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "卡尔加里、埃德蒙顿                                (YYC、YEG、XCAB、YDC)",
@@ -3529,7 +3943,8 @@
               "transport": "OA",
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "多伦多（YYZ、YOO、YHM、YXU、    YGK、YDD、XYY1、XYY4)",
@@ -3541,7 +3956,8 @@
               "transport": "OA",
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "渥太华（YOW)",
@@ -3553,7 +3969,8 @@
               "transport": "OA",
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "温尼伯（XYY3）",
@@ -3565,7 +3982,8 @@
               "transport": "OA",
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3577,12 +3995,14 @@
         {
           "code": "CA-T35-YVR",
           "name": "加拿大海卡35天-温哥华",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "35天",
           "sign_lead": "35-40天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "温哥华(YVR，YXX)",
@@ -3591,9 +4011,11 @@
                 "75": 10.9,
                 "101": 9.9
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "卡尔加里、埃德蒙顿                           (YYC、YEG、XCAB、YDC)",
@@ -3602,9 +4024,11 @@
                 "75": 10.1,
                 "101": 9.1
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "渥太华(YOW)",
@@ -3613,9 +4037,11 @@
                 "75": 10.7,
                 "101": 9.7
               },
+              "transport": null,
               "pickup_lead": "35天",
               "sign_lead": "35-40天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3634,6 +4060,7 @@
           "pickup_lead": "40天",
           "sign_lead": "40-45天",
           "comp_penalty": "无",
+          "remark": null,
           "zones": [
             {
               "zone": "多伦多（YYZ、YOO、YDC)",
@@ -3645,7 +4072,8 @@
               "transport": "OA",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "多伦多（YHM、YXU、YGK)",
@@ -3657,7 +4085,8 @@
               "transport": "OA",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             },
             {
               "zone": "渥太华（YOW)",
@@ -3669,7 +4098,8 @@
               "transport": "OA",
               "pickup_lead": "40天",
               "sign_lead": "40-45天",
-              "comp_penalty": "无"
+              "comp_penalty": "无",
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -3681,11 +4111,14 @@
         {
           "code": "CA-E40-YTO",
           "name": "加拿大海卡40天-多伦多",
+          "transport": null,
           "transport_class": "海运",
           "vol_divisor": 6000,
           "clearance_fee": 0,
           "pickup_lead": "40天",
           "sign_lead": "40-45天",
+          "comp_penalty": null,
+          "remark": null,
           "zones": [
             {
               "zone": "多伦多(YYZ、YOO、YHM、YXU、      YGK、YDD、XYY1、XYY4)",
@@ -3694,8 +4127,11 @@
                 "75": 10.4,
                 "101": 9.4
               },
+              "transport": null,
               "pickup_lead": "40天",
-              "sign_lead": "40-45天"
+              "sign_lead": "40-45天",
+              "comp_penalty": null,
+              "remark": null
             }
           ],
           "tier_cols": [
@@ -5506,9 +5942,9 @@
       {
         "channel": "美国海卡40天-休斯顿",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "35-40天",
         "code": "US-T40-HOU"
@@ -6408,9 +6844,9 @@
       {
         "channel": "美国海卡40天-休斯顿",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "35-40天",
         "code": "US-T40-HOU"
@@ -6420,9 +6856,9 @@
       {
         "channel": "美国海卡40天-休斯顿",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "35-40天",
         "code": "US-T40-HOU"
@@ -6432,9 +6868,9 @@
       {
         "channel": "美国海卡40天-休斯顿",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "35-40天",
         "code": "US-T40-HOU"
@@ -6444,9 +6880,9 @@
       {
         "channel": "美国海卡40天-休斯顿",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "35-40天",
         "code": "US-T40-HOU"
@@ -7506,9 +7942,9 @@
       {
         "channel": "美国海卡45天-萨凡纳",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "40-45天",
         "code": null
@@ -7518,9 +7954,9 @@
       {
         "channel": "美国海卡45天-萨凡纳",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "40-45天",
         "code": null
@@ -7530,9 +7966,9 @@
       {
         "channel": "美国海卡45天-萨凡纳",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "40-45天",
         "code": null
@@ -7542,9 +7978,9 @@
       {
         "channel": "美国海卡45天-萨凡纳",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "40-45天",
         "code": null
@@ -7554,9 +7990,9 @@
       {
         "channel": "美国海卡45天-萨凡纳",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "40-45天",
         "code": null
@@ -7566,9 +8002,9 @@
       {
         "channel": "美国海卡45天-萨凡纳",
         "tiers": {
-          "12": 10,
-          "75": 10,
-          "100": 10
+          "12": 10.0,
+          "75": 10.0,
+          "100": 10.0
         },
         "lead": "40-45天",
         "code": null
@@ -7657,58 +8093,58 @@
     "piece_girth_range": "围长<=260CM；261 - 265CM单询",
     "piece_weight_range": "12Kg - 22Kg，不足12kg进位12kg；22kg - 30kg 单询",
     "oversize_fee": {
-      "US": 200,
-      "UK": 450,
-      "EU": 450,
-      "CA": 200
+      "US": 200.0,
+      "UK": 450.0,
+      "EU": 450.0,
+      "CA": 200.0
     },
     "overweight_fee": {
-      "US": 200,
-      "UK": 450,
-      "EU": 450,
-      "CA": 200
+      "US": 200.0,
+      "UK": 450.0,
+      "EU": 450.0,
+      "CA": 200.0
     },
     "export_customs_fee": {
       "快递": {
-        "US": 350,
-        "UK": 350,
-        "EU": 350,
-        "CA": 350
+        "US": 350.0,
+        "UK": 350.0,
+        "EU": 350.0,
+        "CA": 350.0
       },
       "空运": {
-        "US": 350,
-        "UK": 350,
-        "EU": 350,
-        "CA": 350
+        "US": 350.0,
+        "UK": 350.0,
+        "EU": 350.0,
+        "CA": 350.0
       },
       "卡航铁路": {
-        "UK": 350,
-        "EU": 350
+        "UK": 350.0,
+        "EU": 350.0
       },
       "海运": {
-        "US": 350,
-        "UK": 350,
-        "EU": 350,
-        "CA": 350
+        "US": 350.0,
+        "UK": 350.0,
+        "EU": 350.0,
+        "CA": 350.0
       }
     },
     "import_clears_fee": {
       "快递": {
-        "US": 200,
-        "UK": 200,
-        "CA": 200
+        "US": 200.0,
+        "UK": 200.0,
+        "CA": 200.0
       },
       "空运PVA": {
-        "UK": 350,
-        "EU": 400
+        "UK": 350.0,
+        "EU": 400.0
       },
       "卡航铁路PVA": {
-        "UK": 350,
-        "EU": 400
+        "UK": 350.0,
+        "EU": 400.0
       },
       "海运PVA": {
-        "UK": 350,
-        "EU": 400
+        "UK": 350.0,
+        "EU": 400.0
       }
     },
     "rules": [
@@ -7775,30 +8211,6 @@
           "US": "2元/托/天"
         },
         "note": "超7天开始计费，不足1托盘按1托盘，拒接长期存仓货（1托盘≈1.6CBM）"
-      },
-      {
-        "node": "计费重",
-        "charge": "材积重公式",
-        "ctype": "快递",
-        "by_country": {
-          "US": "/5000",
-          "UK": "/5000",
-          "EU": "/5000",
-          "CA": "/5000"
-        },
-        "note": null
-      },
-      {
-        "node": "计费重",
-        "charge": "材积重公式",
-        "ctype": "专线",
-        "by_country": {
-          "US": "/6000",
-          "UK": "/6000",
-          "EU": "/6000",
-          "CA": "/6000"
-        },
-        "note": null
       },
       {
         "node": "单票单件",
@@ -8057,8 +8469,8 @@
       "channel": "美国海派13天-洛杉矶 / 美国海卡13天-洛杉矶",
       "carrier": "MATSON CLX",
       "vessel": "LURLINE 103E",
-      "etd": "2026/09/08",
-      "eta": "2026/09/19",
+      "etd": "2026/09/09",
+      "eta": "2026/09/20",
       "port": "C60",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8066,8 +8478,8 @@
       "channel": "美国海派17天-洛杉矶 / 美国海卡17天-洛杉矶",
       "carrier": "EMC/合德",
       "vessel": "EVER MEMO 0024-013E                                 ADAMASTOS 2612E",
-      "etd": "2026/09/08",
-      "eta": "2026/09/22",
+      "etd": "2026/09/09",
+      "eta": "2026/09/23",
       "port": "LA-WBCT",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8075,8 +8487,8 @@
       "channel": "美国海派21天-洛杉矶 / 美国海卡21天-洛杉矶",
       "carrier": "OA统配",
       "vessel": "COSCO SHIPPING YANGPU SEA 009E",
-      "etd": "2026/09/09",
-      "eta": "2026/09/24",
+      "etd": "2026/09/10",
+      "eta": "2026/09/25",
       "port": "LBCT",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8084,8 +8496,8 @@
       "channel": "美国海卡35天-芝加哥",
       "carrier": "OA统配",
       "vessel": "COSCO SHIPPING YANGPU SEA 009E",
-      "etd": "2026/09/09",
-      "eta": "2026/09/24",
+      "etd": "2026/09/10",
+      "eta": "2026/09/25",
       "port": "LBCT",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8093,8 +8505,8 @@
       "channel": "美国海卡40天-休斯顿",
       "carrier": "OA统配",
       "vessel": "ONE HUMEN 101E",
-      "etd": "2026/09/05",
-      "eta": "2026/10/05",
+      "etd": "2026/09/06",
+      "eta": "2026/10/06",
       "port": "Houston",
       "cut_off": "2026/9/2\n周三 18:00:00"
     },
@@ -8102,8 +8514,8 @@
       "channel": "美国海卡28天-纽约",
       "carrier": "OA统配",
       "vessel": "ZIM Albatross (ZA5)  17  E",
-      "etd": "2026/09/07",
-      "eta": "2026/09/21",
+      "etd": "2026/09/08",
+      "eta": "2026/09/22",
       "port": "LBCT",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8111,8 +8523,8 @@
       "channel": "美国海卡40天-纽约",
       "carrier": "COSCO",
       "vessel": "OOCL DAFFODIL 006E",
-      "etd": "2026/09/06",
-      "eta": "2026/10/05",
+      "etd": "2026/09/07",
+      "eta": "2026/10/06",
       "port": "Houston",
       "cut_off": "2026/9/3\n周四 18:00:00"
     },
@@ -8120,8 +8532,8 @@
       "channel": "美国海卡45天-萨凡纳",
       "carrier": "OA统配",
       "vessel": "EVER MAX 1374E",
-      "etd": "2026/09/04",
-      "eta": "2026/10/04",
+      "etd": "2026/09/05",
+      "eta": "2026/10/05",
       "port": "SAV",
       "cut_off": "2026/9/1\n周二 18:00:00"
     },
@@ -8129,8 +8541,8 @@
       "channel": "英国海运35天-快递 / 英国海运35天PVA-快递 / 英国海运35天-卡派 / 英国海运35天PVA-卡派",
       "carrier": "COSCO/OOCL等",
       "vessel": "EVER EDIT 002W                                               OOCL SPAIN 013W",
-      "etd": "2026/09/12",
-      "eta": "2026/10/14",
+      "etd": "2026/09/13",
+      "eta": "2026/10/15",
       "port": "Felixstowe",
       "cut_off": "2026/9/3\n周四 18:00:00"
     },
@@ -8138,8 +8550,8 @@
       "channel": "加拿大海派20天-美转加 / 加拿大海卡20天-美转加",
       "carrier": "MATSON CLX",
       "vessel": "LURLINE 103E",
-      "etd": "2026/09/08",
-      "eta": "2026/09/19",
+      "etd": "2026/09/09",
+      "eta": "2026/09/20",
       "port": "C60",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8147,8 +8559,8 @@
       "channel": "加拿大海派25天-美转加 / 加拿大海卡25天-美转加",
       "carrier": "HEDE",
       "vessel": "ADAMASTOS 2612E",
-      "etd": "2026/09/08",
-      "eta": "2026/09/22",
+      "etd": "2026/09/09",
+      "eta": "2026/09/23",
       "port": "LA-WBCT",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8156,8 +8568,8 @@
       "channel": "加拿大海派30天-美转加 / 加拿大海卡30天-美转加",
       "carrier": "COSCO/EMC",
       "vessel": "COSCO SHIPPING YANGPU SEA 009E",
-      "etd": "2026/09/09",
-      "eta": "2026/09/24",
+      "etd": "2026/09/10",
+      "eta": "2026/09/25",
       "port": "LBCT",
       "cut_off": "2026/9/5\n周六 18:00:00"
     },
@@ -8165,8 +8577,8 @@
       "channel": "加拿大海派35天-温哥华 / 加拿大海卡35天-温哥华",
       "carrier": "OA统配",
       "vessel": "OOCL OAKLAND 144E",
-      "etd": "2026/09/10",
-      "eta": "2026/09/16",
+      "etd": "2026/09/11",
+      "eta": "2026/09/17",
       "port": "Vancouver",
       "cut_off": "2026/9/7\n周一 18:00:00"
     },
@@ -8174,8 +8586,8 @@
       "channel": "加拿大海派40天-多伦多 / 加拿大海卡40天-多伦多",
       "carrier": "OA统配",
       "vessel": "OOCL OAKLAND 144E",
-      "etd": "2026/09/10",
-      "eta": "2026/09/16",
+      "etd": "2026/09/11",
+      "eta": "2026/09/17",
       "port": "Vancouver",
       "cut_off": "2026/9/7\n周一 18:00:00"
     },
